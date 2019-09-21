@@ -1,0 +1,162 @@
+﻿/* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+googleLogo {
+    width: 66px;
+    height: 26px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000000;
+}
+/* -----Buttons --------------------------------------------------------------------------------*/
+#Log-in_Button {
+    position: absolute;
+    z-index: 8;
+    border-radius: 50%;
+    background-color: rgb(85, 142, 250);
+    text-align: center;
+    cursor: pointer;
+    right: 0.5em;
+    top: 0.5em;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    vertical-align: middle;
+    padding-right: 10px;
+    padding-top: 5px;
+    border-width: 0;
+}
+
+#Hamburger_button {
+    position: absolute;
+    z-index: 8;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    right: 0.5em;
+    top: 5em;
+    padding: 8px;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    vertical-align: middle;
+    align-items: center;
+    align-content: center;
+    border-width: 0;
+}
+
+#leftHamburger {
+    position: absolute;
+    z-index: 8;
+    background-color: white;
+    vertical-align: middle;
+    border-width: 0;
+    margin-top: 8px;
+    margin-left: 3px;
+}
+
+/* -----Side Panel----------------------------------------------------------------------------------*/
+.sidepanel {
+    height: 92%; /* Specify a height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 8; /* Stay on top */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    /* padding-top: 20px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+.leftSidepanel {
+    height: 92%; /* Specify a height, make sure the panel doesn't cover up Google logo */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 5; /* Stay on top */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    /*padding: 8% 0 0 0;*/
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+/* Set a style for all buttons */
+logInFormButton {
+    background-color: #4d90fe;
+    border-color: #3079ed;
+    color: white;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+/* -----Search box------------------------------------------------------------------------------------------------*/
+.pac-card {
+    margin: 5px 0 0 5px;
+    border-radius: 10px;
+    /*box-sizing: border-box;*/
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    font-family: Roboto;
+    position: absolute;
+    z-index: 7;
+    width: 60%;
+}
+
+#pac-input {
+    background-color: transparent;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    padding: 5px;
+    text-overflow: ellipsis;
+    width: 100%;
+    left: 7%;
+    z-index: 4;
+    border-width: 0;
+}
+
+/* #pac-input:focus {
+            border-color: white;
+        } */
+
+#pac-container {
+    padding: 5px;
+    padding-left: 35px;
+    z-index: 4;
+}
+
+/* full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    /* padding: 15px;
+            /* margin: 5px 20px 0 20px;
+            /* padding-left: 20px;
+            /* display: inline-block; */
+    /* border: 1px solid #ccc; */
+    box-sizing: border-box;
+    z-index: 4;
+}
