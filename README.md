@@ -55,12 +55,17 @@ See pictures
 ### 6. TO DO
 *GUI
   ~~* Log in button doesn't work as intended~~
+  
   ~~* Option button doesn't work as intended~~
+  
   ~~* Marker and Circle appears when clicked rather than hard coded location~~
+  
   ~~* Create sliding panel on left when a location is clicked~~
+  
     * Photos
     * Description
     * Comments
+    
   ~~* Create Geocode search bar~~
     
 *Data
