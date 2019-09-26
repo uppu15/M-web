@@ -3,7 +3,7 @@
 
 The purpose of this application is to empower the image features on the google map (During research, I learned that google actually alraedy have exact same feature as my application is intending to do).  Let users upload photos ~~to almost-exact location of the location where the photo is taken,~~ so that others who visit the location on the map will have better understanding of the location.
 
-## Index
+### Table of Contents
 
 
 [1. Database Diagram](#1-database-diagram)
@@ -19,16 +19,29 @@ The purpose of this application is to empower the image features on the google m
 [6. TO DO](#6-to-do)
 
 ### 1. Database Diagram
+preliminary tables.
 ![database](https://i.imgur.com/z5mGIAY.jpg)
+
+
+[Top](#table-of-contents)
 
 ### 2. Entity Relationship Diagram
 ![ERD](https://i.imgur.com/Xiyfv0E.png)
 
+
+[Top](#table-of-contents)
+
 ### 3. Requirements Traceability Matrix
 ![RTM](https://i.imgur.com/PvkbOt7.jpg)
 
+
+[Top](#table-of-contents)
+
 ### 4. UML
 ![UML](https://i.imgur.com/kPPjKds.jpg)
+
+
+[Top](#table-of-contents)
 
 ### 5. Wireframe Sketch
 First look at the UI before log in
@@ -52,8 +65,12 @@ See pictures
 ### 5.1 UI in work
 ![current](https://i.imgur.com/9KrmX9M.jpg)
 
-### 6. TO DO
+
+[Top](#table-of-contents)
+
+### 6. TASK LIST
 *GUI
+
   ~~* Log in button doesn't work as intended~~
   
   ~~* Option button doesn't work as intended~~
@@ -72,3 +89,6 @@ See pictures
   * Log-in feature
   * Dummy data for photos, left sliding panel fill up
   * Fix data base according to shift of intention
+  
+
+[Top](#table-of-contents)
