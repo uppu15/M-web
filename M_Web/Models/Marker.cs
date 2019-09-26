@@ -10,10 +10,10 @@ namespace M_Web.Models
     {
         [Key]
         public int userID { get; set; }
-        public string markerID { get; set; }
-        public decimal markerLat { get; set; }
-        public decimal markerLng { get; set; }
-        public string markerType { get; set; }
+        public int markerID { get; set; }
+        public double markerLat { get; set; }
+        public double markerLng { get; set; }
+        //public string markerType { get; set; }
         //create column for image
     }
 }

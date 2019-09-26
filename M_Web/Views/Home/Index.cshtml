@@ -15,10 +15,22 @@
     <div>
         <div id="map"></div>
         <div id="LoginSidePanel" class="sidepanel">
-            <div style="padding: 50px 5% 0 2%">
+            <div style="padding: 50px 20% 0 2%">
                 <form action="" method="post">
-                    <div class="imgContainer">
-                        Here comes log in page
+                    <div id="LoginContainer">
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>
+
+                        <button type="submit">Login</button>
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                    </div>
+                    <div id="LoginContainer" style="background-color:#f1f1f1">
+                        <span class="psw">Forgot <a href="#">password?</a></span>
                     </div>
                 </form>
             </div>
@@ -42,7 +54,7 @@
                      width="20" height="20"
                      viewBox="0 0 172 172"
                      style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
+                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
                 </svg>
             </button>
             <div id="pac-container">
@@ -55,7 +67,7 @@
                  width="25" height="25"
                  viewBox="0 0 172 172"
                  style=" fill:#000000;">
-                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal; margin:20px 0px;"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M44.72,0c-5.65694,0 -10.32,4.65923 -10.32,10.32v65.36h6.88v-65.36c0,-1.94163 1.50142,-3.44 3.44,-3.44h116.96c1.93858,0 3.44,1.49837 3.44,3.44v151.36c0,1.9365 -1.5035,3.44 -3.44,3.44h-116.96c-1.9365,0 -3.44,-1.5035 -3.44,-3.44v-65.36h-6.88v65.36c0,5.65902 4.66098,10.32 10.32,10.32h116.96c5.65902,0 10.32,-4.66098 10.32,-10.32v-151.36c0,-5.66077 -4.66306,-10.32 -10.32,-10.32zM75.82781,45.06265c-1.39859,0.00309 -2.65612,0.85256 -3.18113,2.14887c-0.52501,1.29631 -0.21302,2.78145 0.78926,3.75691l31.58485,31.59156h-101.58078c-1.24059,-0.01754 -2.39452,0.63425 -3.01993,1.7058c-0.62541,1.07155 -0.62541,2.39684 0,3.46839c0.62541,1.07155 1.77935,1.72335 3.01993,1.7058h101.58078l-31.59156,31.59156c-0.89864,0.86282 -1.26063,2.14403 -0.94636,3.34954c0.31427,1.2055 1.25569,2.14693 2.4612,2.4612c1.20551,0.31427 2.48672,-0.04772 3.34954,-0.94636l39.89594,-39.89594l-39.88922,-39.89594c-0.64928,-0.66743 -1.54136,-1.04317 -2.4725,-1.04141z"></path></g></g>
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal; margin:20px 0px;"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M44.72,0c-5.65694,0 -10.32,4.65923 -10.32,10.32v65.36h6.88v-65.36c0,-1.94163 1.50142,-3.44 3.44,-3.44h116.96c1.93858,0 3.44,1.49837 3.44,3.44v151.36c0,1.9365 -1.5035,3.44 -3.44,3.44h-116.96c-1.9365,0 -3.44,-1.5035 -3.44,-3.44v-65.36h-6.88v65.36c0,5.65902 4.66098,10.32 10.32,10.32h116.96c5.65902,0 10.32,-4.66098 10.32,-10.32v-151.36c0,-5.66077 -4.66306,-10.32 -10.32,-10.32zM75.82781,45.06265c-1.39859,0.00309 -2.65612,0.85256 -3.18113,2.14887c-0.52501,1.29631 -0.21302,2.78145 0.78926,3.75691l31.58485,31.59156h-101.58078c-1.24059,-0.01754 -2.39452,0.63425 -3.01993,1.7058c-0.62541,1.07155 -0.62541,2.39684 0,3.46839c0.62541,1.07155 1.77935,1.72335 3.01993,1.7058h101.58078l-31.59156,31.59156c-0.89864,0.86282 -1.26063,2.14403 -0.94636,3.34954c0.31427,1.2055 1.25569,2.14693 2.4612,2.4612c1.20551,0.31427 2.48672,-0.04772 3.34954,-0.94636l39.89594,-39.89594l-39.88922,-39.89594c-0.64928,-0.66743 -1.54136,-1.04317 -2.4725,-1.04141z"></path></g></g>
             </svg>
         </button>
         <button id="Hamburger_button" title="Options" onclick="toggleOptionSidePanel()">
@@ -63,7 +75,7 @@
                      width="27" height="27"
                      viewBox="0 0 172 172"
                      style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
+                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
                 </svg>
         </button>
         <div id="googleLogo">
@@ -74,6 +86,10 @@
     <script>
         var map, infoWindow;
         var sandiego = { lat: 32.8227269, lng: -117.1496352 };
+        var curLoc = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
         //var whereAmI = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         //    width="22" height="22"
         //    viewBox="0 0 172 172"
@@ -102,7 +118,7 @@
 
             // Setup the click event listeners: simply set the map to San Diego.
             controlUI.addEventListener('click', function () {
-                map.setCenter(location);
+                map.setCenter(curLoc);
             });
         }
 
@@ -117,8 +133,31 @@
             google.maps.event.addListener(map, 'click', function (event) {
                 placeMarker(event.latLng);
             });
+            google.maps.event.addListener(map, 'click', function (event) {
+                changeMarkerOption(placaeMarker(event.latLng));
+            })
+                    
+            var marker2 = new google.maps.Marker({
+                position: sandiego,
+                map: map,
+                opacity: 0.4
+            });
+        //    function changeMarkerOption(placeMarker(location)) {
+        //    google.maps.event.addEventListener(map, 'click', function (event) {
+        //        if (google.maps.geometry.poly.containsLocation(sandiego, placeMarker.circle) == true)
+        //            marker2.setOptions({
+        //                opacity: 1
+        //            });
+        //        else {
+        //            marker2.setOptions({
+        //                opacity: 0
+        //            });
+        //        }
+        //    }
+        //}
+        
             infoWindow = new google.maps.InfoWindow;
-
+            
             //check for geolocation(user's current location)
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -236,7 +275,6 @@
 
         //Create marker at clicked location
         //Create circle at clicked location
-        //Circle will later query and return pins that has photos
         function placeMarker(location) {
             if (marker) {
                 marker.setPosition(location);
@@ -257,7 +295,6 @@
                 });
             }
         }
-
     </script>
     <script>     
         function toggleLoginSidePanel() {
@@ -281,12 +318,29 @@
                 document.getElementById("LeftHamburger").style.width = '0px';
             } else {
                 document.getElementById("LeftHamburger").style.width = '61%';
-                document.getElementsByTagName("GoogleWatermark").zindex = '5';
             }
         }
+
+        window.onclick = function (event) {
+            if (event.target != LoginSidePanel) {
+                document.getElementById("LoginSidePanel").style.width = '0px';
+            }
+        }
+        window.onclick = function (event) {
+            if (event.target == OptionPanel) {
+                document.getElementById("OptionPanel").style.width = '0px';
+            }
+        }
+        window.onclick = function (event) {
+            if (event.target == LeftHamburger) {
+                document.getElementById("LeftHamburger").style.width = '0px';
+            }
+        }
+
+
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbjx5U78SGpevXKDEYCrcYT02y-81KG3Q&callback=initMap">
     </script>
 </body>
 </html>
