@@ -3,14 +3,14 @@
 
 The purpose of this application is to empower the image features on the google map (During research, I learned that google actually alraedy have exact same feature as my application is intending to do).  Let users upload photos ~~to almost-exact location of the location where the photo is taken,~~ so that others who visit the location on the map will have better understanding of the location.
 
-### Table of Contents
+## Table of Contents
 
 
 [1. Database Diagram](#1-database-diagram)
 
 [2. Entity Relationship Diagram](#2-entity-relationship-diagram)
 
-[3. Requirements Traceability Matrix](#3-requirements-traceabiltiy-matrix)
+[3. Requirements Traceability Matrix](#3-requirements-traceability-matrix)
 
 [4. UML](#4-uml)
 
@@ -18,7 +18,7 @@ The purpose of this application is to empower the image features on the google m
 
 [6. TO DO](#6-to-do)
 
-### 1. Database Diagram
+## 1. Database Diagram
 preliminary tables.
 ![database](https://i.imgur.com/z5mGIAY.jpg)
 
@@ -29,25 +29,25 @@ I originally thought to create seperate view page for forum to have users talk a
 
 [Top](#table-of-contents)
 
-### 2. Entity Relationship Diagram
+## 2. Entity Relationship Diagram
 ![ERD](https://i.imgur.com/Xiyfv0E.png)
 
 
 [Top](#table-of-contents)
 
-### 3. Requirements Traceability Matrix
+## 3. Requirements Traceability Matrix
 ![RTM](https://i.imgur.com/PvkbOt7.jpg)
 
 
 [Top](#table-of-contents)
 
-### 4. UML
-![UML](https://i.imgur.com/kPPjKds.jpg)
+## 4. UML
+![UML](https://github.com/uppu15/M-web/blob/master/Sources/UML_edit.jpg?raw=true)
 
 
 [Top](#table-of-contents)
 
-### 5. Wireframe Sketch
+## 5. Wireframe Sketch
 First look at the UI before log in
 ![FirstLook](https://i.imgur.com/0aeOKFV.jpg)
 
@@ -67,32 +67,61 @@ See pictures
 ![Image](https://i.imgur.com/TCvIXda.jpg)
 
 ### 5.1 UI in work
-![current](https://i.imgur.com/9KrmX9M.jpg)
+![current](https://github.com/uppu15/M-web/blob/master/Sources/UI%20in%20work.JPG?raw=true)
+
+![current1](https://github.com/uppu15/M-web/blob/master/Sources/UI%20in%20work_a.JPG?raw=true)
 
 
 [Top](#table-of-contents)
 
-### 6. TASK LIST
-*GUI
+## 6. TASK LIST
 
-  ~~* Log in button doesn't work as intended~~
+### TODO:
+
+*UI
   
-  ~~* Option button doesn't work as intended~~
-  
-  ~~* Marker and Circle appears when clicked rather than hard coded location~~
-  
-  ~~* Create sliding panel on left when a location is clicked~~
-  
-    * Photos
-    * Description
-    * Comments
+  * Log-in sliding panel
+  * Option sliding panel
+  * Finish search panel ( auto complete feature broken )
+  * Left sliding panel
+    * create section for photos preview
+    * create section for description
+    * create section for comments
+  * Load up big photo upon click on preview section
+
     
-  ~~* Create Geocode search bar~~
+* Data
+  * Finish database / tables
+    * Marker 
+      * Photos
+      * Comments
+    * User
+    * User Settings
+  * Find how to let DB talk to Maps API
+  
+* Responsive view
+  * Original purpose of this project was for enhanced use of google maps api's road view ( use in where road is not reached ).
+  
+### In Progess:
+
+* UI
+  * Log-in sliding panel
+  
+* Data
+  * Working on migrating tables into project
+  
+### Completed:
+
+* UI
+  * Log in button doesn't work as intended
+  
+  * Option button doesn't work as intended
+  
+  * Marker and Circle appears when clicked rather than hard coded location
+  
+  * Create sliding panel on left when a location is clicked
     
-*Data
-  * Log-in feature
-  * Dummy data for photos, left sliding panel fill up
-  * Fix data base according to shift of intention
+  * Create Geocode search bar
   
 
 [Top](#table-of-contents)
