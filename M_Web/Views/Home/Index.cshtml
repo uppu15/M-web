@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
+<link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css">
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -71,12 +71,12 @@
             </svg>
         </button>
         <button id="Hamburger_button" title="Options" onclick="toggleOptionSidePanel()">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                     width="27" height="27"
-                     viewBox="0 0 172 172"
-                     style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 width="27" height="27"
+                 viewBox="0 0 172 172"
+                 style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
+            </svg>
         </button>
         <div id="googleLogo">
             <img src="https://maps.gstatic.com/mapfiles/api-3/images/google4_hdpi.png" style="z-index:100">
@@ -86,16 +86,12 @@
     <script>
         var map, infoWindow;
         var sandiego = { lat: 32.8227269, lng: -117.1496352 };
-        var curLoc = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
+        var oceanside = { lat: 33.306769, lng: -117.308317 };
+        var gmarker2, gmarker3;
         //var whereAmI = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
         //    width="22" height="22"
         //    viewBox="0 0 172 172"
         //    style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M86,165.55c-43.8643,0 -79.55,-35.6857 -79.55,-79.55c0,-43.8643 35.6857,-79.55 79.55,-79.55c43.8643,0 79.55,35.6857 79.55,79.55c0,43.8643 -35.6857,79.55 -79.55,79.55z" fill="#ffffff"></path><path d="M86,8.6c42.6775,0 77.4,34.7225 77.4,77.4c0,42.6775 -34.7225,77.4 -77.4,77.4c-42.6775,0 -77.4,-34.7225 -77.4,-77.4c0,-42.6775 34.7225,-77.4 77.4,-77.4M86,4.3c-45.1199,0 -81.7,36.5801 -81.7,81.7c0,45.1199 36.5801,81.7 81.7,81.7c45.1199,0 81.7,-36.5801 81.7,-81.7c0,-45.1199 -36.5801,-81.7 -81.7,-81.7z" fill="#3498db"></path><g fill="#3498db"><path d="M86,64.5c-11.87412,0 -21.5,9.62588 -21.5,21.5c0,11.87412 9.62588,21.5 21.5,21.5c11.87412,0 21.5,-9.62588 21.5,-21.5c0,-11.87412 -9.62588,-21.5 -21.5,-21.5z"></path></g></g></g></svg>;
-
-
         //Center button
         function CenterControl(controlDiv, map) {
             // Set CSS for the control border.
@@ -115,31 +111,63 @@
             controlUI.style.height = '45px';
             controlUI.title = 'Center Me Button';
             controlDiv.appendChild(controlUI);
-
-            // Setup the click event listeners: simply set the map to San Diego.
-            controlUI.addEventListener('click', function () {
-                map.setCenter(curLoc);
-            });
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var curLoc = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    // Setup the click event listeners: simply set the map to San Diego.
+                    controlUI.addEventListener('click', function () {
+                        map.setCenter(curLoc);
+                    });
+                });
+            }
         }
+
     //initiate google maps api centered at Embry-Riddle
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
                 center: { lat: 32.8195, lng: -117.14099 },
-                mapTypeControl: false,
-                fullscreenControl: false
+                fullscreenControl: false,
+                mapTypeControlOptions: {
+                    position: google.maps.ControlPosition.BOTTOM_RIGHT
+                }
             });
             google.maps.event.addListener(map, 'click', function (event) {
                 placeMarker(event.latLng);
             });
             google.maps.event.addListener(map, 'click', function (event) {
-                changeMarkerOption(placaeMarker(event.latLng));
-            })
-                    
-            var marker2 = new google.maps.Marker({
+                //dummy points near my school/library so I can check if the function works
+                var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
+                var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
+                var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, sandiegoLatLng);
+                console.log((distance).toFixed(2));
+                if (distance > circle.radius) {
+                    marker2.setVisible(false);
+                }
+                else {
+                    marker2.setVisible(true);
+                }
+                //}
+                //var resultOpacity = google.maps.geometry.poly.containsLocation(sandiego, event.circle) ? google.maps.Marker.setVisible(marker2(true)) : google.maps.Marker.setVisible(marker2(false));
+                //new google.maps.Marker({
+                //    position: sandiego,
+                //    map: map,
+                //    icon: {
+                //        opacity: resultOpacity,
+                //        scale: 2
+                //    }
+                //});
+            });
+            marker2 = new google.maps.Marker({
                 position: sandiego,
+                map: map
+            });
+            marker3 = new google.maps.Marker({
+                position: oceanside,
                 map: map,
-                opacity: 0.4
             });
         //    function changeMarkerOption(placeMarker(location)) {
         //    google.maps.event.addEventListener(map, 'click', function (event) {
@@ -154,9 +182,7 @@
         //        }
         //    }
         //}
-        
             infoWindow = new google.maps.InfoWindow;
-            
             //check for geolocation(user's current location)
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -164,7 +190,6 @@
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-
                     //User location marker that will be placed on the map
                     var myLocMarker = new google.maps.Marker({
                         position: curLoc,
@@ -174,20 +199,17 @@
                         },
                         map: map
                     })
-
                     //place marker, and center map to curLoc
                     infoWindow.setContent(myLocMarker);
                     infoWindow.open(map);
                     map.setCenter(curLoc);
                 },
-                    function () {
-                        handleLocationError(true, infoWindow, map.getCenter());
+            function () {
+                handleLocationError(true, infoWindow, map.getCenter());
                     });
             } else {
                 handleLocationError(false, infoWindow, map.getCenter());
             }
-
-
             function handleLocationError(browserHasGeolocation, infoWindow, curLoc) {
                 infoWindow.setPosition(curLoc);
                 infoWindow.setContent(browserHasGeolocation ?
@@ -195,34 +217,26 @@
                     'Error: Your browser does not support geolocation.');
                 infoWindow.open(map);
             }
-
-
             var centerControlDiv = document.createElement('div');
             var centerControl = new CenterControl(centerControlDiv, map);
-
             centerControlDiv.index = 1;
             map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
         };
-    </script>
+    @*</script>
 
-    <script>
+    <script>*@
         //search box-----------------------------------------------------------------------------
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
-
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
-
         var autocomplete = new google.maps.places.Autocomplete(input);
-
         // Bind the map's bounds (viewport) property to the autocomplete object,
         // so that the autocomplete requests use the current map bounds for the
         // bounds option in the request.
         autocomplete.bindTo('bounds', map);
-
         // Set the data fields to return when the user selects a place.
         autocomplete.setFields(
             ['address_components', 'geometry', 'icon', 'name']);
-
         autocomplete.addListener('place_changed', function() {
           infowindow.close();
           marker.setVisible(false);
@@ -233,7 +247,6 @@
                 window.alert("No details available for input: '" + place.name + "'");
                 return;
             }
-
         // If the place has a geometry, then present it on a map.
           if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
@@ -243,7 +256,6 @@
           }
           marker.setPosition(place.geometry.location);
           marker.setVisible(true);
-
           var address = '';
           if (place.address_components) {
             address = [
@@ -252,26 +264,21 @@
               (place.address_components[2] && place.address_components[2].short_name || '')
             ].join(' ');
           }
-
           infowindowContent.children['place-icon'].src = place.icon;
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-address'].textContent = address;
           infowindow.open(map, marker);
         });
-
-
         document.getElementById('use-strict-bounds')
             .addEventListener('click', function() {
               console.log('Checkbox clicked! New state=' + this.checked);
               autocomplete.setOptions({strictBounds: this.checked});
             });
-    
-
-    </script>
-    <script>
+    @*</script>
+    <script>*@
         //Marker/circle when clicked on the map-----------------------------------------------------------------
-        var marker, circle;
-
+        var marker;
+        var circle;
         //Create marker at clicked location
         //Create circle at clicked location
         function placeMarker(location) {
@@ -290,12 +297,12 @@
                     strokeOpacity: 0,
                     fillColor: 'rgb(85, 142, 250)',
                     fillOpacity: 0.35,
-                    radius: 500,
+                    radius: 500
                 });
             }
         }
-    </script>
-    <script>     
+    @*</script>
+    <script>*@
         function toggleLoginSidePanel() {
             if (document.getElementById("LoginSidePanel").style.width == '300px') {
                 document.getElementById("LoginSidePanel").style.width = '0px';
@@ -303,7 +310,6 @@
                 document.getElementById("LoginSidePanel").style.width = '300px';
             }
         }
-
         function toggleOptionSidePanel() {
             if (document.getElementById("OptionPanel").style.width == '300px') {
                 document.getElementById("OptionPanel").style.width = '0px';
@@ -311,7 +317,6 @@
                 document.getElementById("OptionPanel").style.width = '300px';
             }
         }
-
         function toggleLeftHamburger() {
             if (document.getElementById("LeftHamburger").style.width == '61%') {
                 document.getElementById("LeftHamburger").style.width = '0px';
@@ -319,7 +324,6 @@
                 document.getElementById("LeftHamburger").style.width = '61%';
             }
         }
-
         window.onclick = function (event) {
             if (event.target != LoginSidePanel) {
                 document.getElementById("LoginSidePanel").style.width = '0px';
@@ -335,11 +339,14 @@
                 document.getElementById("LeftHamburger").style.width = '0px';
             }
         }
-
-
+    </script>
+    <script>
+            //I found out that I needed to implement library myself after dealing with source code for 4 weeks. wonderful.
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbjx5U78SGpevXKDEYCrcYT02y-81KG3Q&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbjx5U78SGpevXKDEYCrcYT02y-81KG3Q&libraries=geometry,places&callback=initMap">
     </script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&libraries=geometry"></script>*@
+
 </body>
 </html>
