@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Marker>
+
+@foreach (var m in Model)
+{
+    <div>
+        <h3>@m.markerID</h3>
+        @m.markerLat
+        @m.markerLng
+    </div>
+}
