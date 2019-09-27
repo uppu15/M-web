@@ -1,0 +1,1 @@
+I am taking different approach for my project.  I am unsure of how the Db communicate with the API at this point.  I wanted to make sure that I have A project that is connected to a Db first.  This project returns view with some dummy marker data.
