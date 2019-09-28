@@ -10,5 +10,6 @@ namespace MWeb1_2.Models
         {
         }
         public DbSet<Marker> Markers { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
