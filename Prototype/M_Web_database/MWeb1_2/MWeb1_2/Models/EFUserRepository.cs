@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MWeb1_2.Models
 {
-    public class EFUserRepository : IUserRepository
+    public class EFUserRepository : IUsersRepository
     {
         private ApplicationDbContext context;
 
@@ -12,6 +12,6 @@ namespace MWeb1_2.Models
             context = ctx;
         }
 
-        public IQueryable<User> Users => context.Users;
+        public IQueryable<Users> Userss => context.Userss;
     }
 }

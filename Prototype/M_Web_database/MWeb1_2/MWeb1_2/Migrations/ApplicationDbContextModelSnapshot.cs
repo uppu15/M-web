@@ -19,6 +19,27 @@ namespace MWeb1_2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("MWeb1_2.Models.Comment", b =>
+                {
+                    b.Property<int>("commentID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("comments");
+
+                    b.Property<string>("markerID");
+
+                    b.Property<int>("userID");
+
+                    b.HasKey("commentID");
+
+                    b.HasIndex("markerID");
+
+                    b.HasIndex("userID");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("MWeb1_2.Models.Marker", b =>
                 {
                     b.Property<string>("markerID")
@@ -28,7 +49,7 @@ namespace MWeb1_2.Migrations
 
                     b.Property<double>("markerLng");
 
-                    b.Property<string>("photo");
+                    b.Property<byte[]>("photo");
 
                     b.Property<string>("photoPath");
 
@@ -36,16 +57,45 @@ namespace MWeb1_2.Migrations
 
                     b.HasKey("markerID");
 
+                    b.HasIndex("userID");
+
                     b.ToTable("Markers");
                 });
 
-            modelBuilder.Entity("MWeb1_2.Models.User", b =>
+            modelBuilder.Entity("MWeb1_2.Models.UserSetting", b =>
+                {
+                    b.Property<int>("settingID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Gps");
+
+                    b.Property<decimal>("centerLat");
+
+                    b.Property<decimal>("centerLng");
+
+                    b.Property<int>("centerZoom");
+
+                    b.Property<string>("mapType");
+
+                    b.Property<int>("pinRadius");
+
+                    b.Property<int>("userID");
+
+                    b.HasKey("settingID");
+
+                    b.HasIndex("userID");
+
+                    b.ToTable("UserSettings");
+                });
+
+            modelBuilder.Entity("MWeb1_2.Models.Users", b =>
                 {
                     b.Property<int>("userID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("created");
+                    b.Property<byte[]>("created");
 
                     b.Property<string>("userEmail");
 
@@ -53,11 +103,39 @@ namespace MWeb1_2.Migrations
 
                     b.Property<string>("userPassword");
 
-                    b.Property<bool>("userStatus");
+                    b.Property<string>("userStatus");
 
                     b.HasKey("userID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Userss");
+                });
+
+            modelBuilder.Entity("MWeb1_2.Models.Comment", b =>
+                {
+                    b.HasOne("MWeb1_2.Models.Marker", "Marker")
+                        .WithMany("Comments")
+                        .HasForeignKey("markerID");
+
+                    b.HasOne("MWeb1_2.Models.Users", "Userss")
+                        .WithMany("Comments")
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MWeb1_2.Models.Marker", b =>
+                {
+                    b.HasOne("MWeb1_2.Models.Users", "Userss")
+                        .WithMany("Markers")
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MWeb1_2.Models.UserSetting", b =>
+                {
+                    b.HasOne("MWeb1_2.Models.Users", "Userss")
+                        .WithMany("UserSettings")
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

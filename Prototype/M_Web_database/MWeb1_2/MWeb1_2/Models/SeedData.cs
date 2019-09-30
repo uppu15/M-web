@@ -52,6 +52,27 @@ namespace MWeb1_2.Models
                 );
                 context.SaveChanges();
             }
+            if (!context.Userss.Any())
+            {
+                context.Userss.AddRange(
+                    new Users
+                    {
+                        userName = "june",
+                        userPassword = "qwer1234"
+                    },
+                    new Users
+                    {
+                        userName = "may",
+                        userPassword = "55555"
+                    },
+                    new Users
+                    {
+                        userName = "April",
+                        userPassword = "4444"
+                    }
+                );
+                context.SaveChanges();
+            }
         }
     }
 }

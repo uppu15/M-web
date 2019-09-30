@@ -24,131 +24,142 @@ DROP CONSTRAINT FK_Post_User;
 
 
 DROP TABLE IF EXISTS Users;
-CREATE TABLE Users
+CREATE TABLE Userss
 (
-	userid			int				NOT NULL,	/* Identity = Do not have to enter value */
-	username		varchar(30)		NOT NULL,
-	user_email		varchar(30)		NOT NULL,
-	user_password	varchar(50)		NOT NULL,
+	userID			int				IDENTITY(1,1)	NOT NULL,	/* Identity = Do not have to enter value */
+	userName		varchar(18)						NOT NULL,
+	userEmail		varchar(MAX)					NOT NULL,
+	userPassword	varchar(50)						NOT NULL,
 	created			timestamp,
-	user_status		varchar(19)		NOT NULL,	/* 'EMAIL_NOT_VERIFIED', 'VERIFIED', 'BLOCKED' */
+	userStatus		varchar(19)						NOT NULL,	/* 'EMAIL_NOT_VERIFIED', 'VERIFIED', 'BLOCKED' */
 
 	CONSTRAINT "PK_Users" PRIMARY KEY  CLUSTERED 
 	(
-		"userid"
+		"userID"
 	)
 );
 
 select * from Users
 
 -----------------------------------------------User Settings------------------------------------------------------------------
-DROP TABLE IF EXISTS User_settings;
+DROP TABLE IF EXISTS UserSetting;
 
-CREATE TABLE User_settings
+CREATE TABLE UserSettings
 (
-	userid			int				NOT NULL,	/* PRIMARY KEY */
-	map_center_lat	decimal (10,6)	NOT NULL,	/* latitude */
-	map_center_long decimal (10,6)	NOT NULL,	/* longitude */
-	map_zoom		int				NOT NULL,	/* 0 being world map to 20 being building view per google */
-	map_type		varchar(10)		NOT NULL,	/* map? or satellite? */
-	pin_radius		tinyint			NOT NULL,	/* how far around the pin user want to look up */
-	GPS				tinyint			NOT NULL,	/* on or off */
+	settingID		int				IDENTITY(1,1)	NOT NULL,
+	userID			int								NOT NULL,	/* PRIMARY KEY */
+	centerLat		decimal (10,6)					NOT NULL,	/* latitude */
+	centerLng		decimal (10,6)					NOT NULL,	/* longitude */
+	centerZoom		int								NOT NULL,	/* 0 being world map to 20 being building view per google */
+	mapType			varchar(10)						NOT NULL,	/* map? or satellite? */
+	pinRadius		int								NOT NULL,	/* how far around the pin user want to look up */
+	GPS				bit								NOT NULL,	/* on or off */
+	CONSTRAINT "PK_Setting" PRIMARY KEY CLUSTERED("settingID"),
 	CONSTRAINT "FK_Settings_Users" FOREIGN KEY
-	("userid") REFERENCES "Users" ("userid")
+	("userID") REFERENCES "Userss" ("userID")
 );
 
-select * from User_settings
+select * from UserSetting
 
 -------------------------------------------------Pins on the map--------------------------------------------------------------
 
 DROP TABLE IF EXISTS Marker;
 
 
-CREATE TABLE Marker
+CREATE TABLE Markers
 (
-	userid			int				NOT NULL,
-	loc_id			varchar(21)		NOT NULL,	/* do i need it? */
-	loc_name		varchar(100)	NULL,
-	loc_address		varchar(80)		NOT NULL,
-	loc_lat			decimal (10,6)	NOT NULL,    
-	loc_long		decimal (10,6)	NOT NULL,
-	loc_type		varchar	(30)	NOT NULL,
-	loc_photo		"image"			NOT NULL,
-	photo_path		varchar(255)	NOT NULL,
+	markerID		int				IDENTITY(1,1)	NOT NULL,
+	userID			int								NOT NULL,
+	markerLat		decimal (10,6)					NOT NULL,    
+	markerLng		decimal (10,6)					NOT NULL,
+	photo			"image"							NOT NULL,
+	photoPath		varchar(255)					NOT NULL,
 	CONSTRAINT "PK_Marker" PRIMARY KEY
-	("loc_id"),
+	("markerID"),
 
 	CONSTRAINT "FK_Marker_User" FOREIGN KEY
-	("userid") REFERENCES "Users" ("userid")
+	("userID") REFERENCES "Userss" ("userID")
 );
 
 select * from Marker
+----------------------------------------------Comment--------------------------------------------------
+DROP TABLE IF Exists Comment
+CREATE TABLE Comments
+(
+	commentID		int					IDENTITY(1,1)		NOT NULL,
+	markerID		int										NOT NULL,
+	userID			int										NOT NULL,
+	comment			nvarchar(MAX)							NOT NULL
+	CONSTRAINT "PK_Comment" PRIMARY KEY ("commentID"),
+	CONSTRAINT "FK_Comment_Marker" FOREIGN KEY ("markerID") REFERENCES "Markers" ("markerID"),
+	CONSTRAINT "FK_Comment_User" FOREIGN KEY ("userID") REFERENCES "Userss" ("userID")
+);
 
 ----------------------------------------------Forum------------------------------------------------------------
-DROP TABLE IF EXists Forum;
+--DROP TABLE IF EXists Forum;
 
-CREATE TABLE Forum
-(
-	threadid		int				NOT NULL,
-	threadtitle		varchar(100)	NOT NULL,
-	num_comment		int				NOT NULL
+--CREATE TABLE Forum
+--(
+--	threadid		int				NOT NULL,
+--	threadtitle		varchar(100)	NOT NULL,
+--	num_comment		int				NOT NULL
 
-	CONSTRAINT "PK_Thread" Primary KEY
-	("threadid")
-);
+--	CONSTRAINT "PK_Thread" Primary KEY
+--	("threadid")
+--);
 
-select * from Forum
+--select * from Forum
 
---------------------------------------------Thread under Forum----------------------------------------------------------------
-ALTER TABLE Post
-DROP CONSTRAINT FK_Post_Thread;
+----------------------------------------------Thread under Forum----------------------------------------------------------------
+--ALTER TABLE Post
+--DROP CONSTRAINT FK_Post_Thread;
 
-DROP TABLE IF EXISTS Thread;
+--DROP TABLE IF EXISTS Thread;
 
-CREATE TABLE Thread
-(
-	threadid		int				NOT NULL,
-	threadtitle		varchar(100)	NOT NULL,
-	userid			int				NOT NULL,	/* Foreign key */
-	created			DATE
+--CREATE TABLE Thread
+--(
+--	threadid		int				NOT NULL,
+--	threadtitle		varchar(100)	NOT NULL,
+--	userid			int				NOT NULL,	/* Foreign key */
+--	created			DATE
 
-	CONSTRAINT "FK_Thread_Forum" FOREIGN KEY
-	("threadid") REFERENCES "Forum" ("threadid"),
+--	CONSTRAINT "FK_Thread_Forum" FOREIGN KEY
+--	("threadid") REFERENCES "Forum" ("threadid"),
 
-	CONSTRAINT "FK_Thread_User" FOREIGN KEY
-	("userid") REFERENCES "Users" ("userid")
-);
+--	CONSTRAINT "FK_Thread_User" FOREIGN KEY
+--	("userid") REFERENCES "Users" ("userid")
+--);
 
-select * from Thread
+--select * from Thread
 
-------------------------------------------Post under Thread under Forum-------------------------------------------------------
-ALTER TABLE Post
-DROP CONSTRAINT "FK_Post_Forum"
-ALTER TABLE Post
-DROP CONSTRAINT "FK_Post_User"
+--------------------------------------------Post under Thread under Forum-------------------------------------------------------
+--ALTER TABLE Post
+--DROP CONSTRAINT "FK_Post_Forum"
+--ALTER TABLE Post
+--DROP CONSTRAINT "FK_Post_User"
 
-DROP TABLE IF EXISTS Post;
+--DROP TABLE IF EXISTS Post;
 
-CREATE TABLE Post
-(
-	postid			int				NOT NULL,
-	content			varchar(1000)	NOT NULL,
-	threadid		int				NOT NULL,	/* Foreign Key */
-	userid			int				NOT NULL,	/* Foreign Key */
-	post_title		varchar(100)	NOT NULL,
-	created			TIMESTAMP
+--CREATE TABLE Post
+--(
+--	postid			int				NOT NULL,
+--	content			varchar(1000)	NOT NULL,
+--	threadid		int				NOT NULL,	/* Foreign Key */
+--	userid			int				NOT NULL,	/* Foreign Key */
+--	post_title		varchar(100)	NOT NULL,
+--	created			TIMESTAMP
 
-	CONSTRAINT "PK_postid" PRIMARY KEY CLUSTERED
-	("postid"),
+--	CONSTRAINT "PK_postid" PRIMARY KEY CLUSTERED
+--	("postid"),
 	
-	CONSTRAINT "FK_Post_Forum" FOREIGN KEY
-	("threadid") REFERENCES "Forum" ("threadid"),
+--	CONSTRAINT "FK_Post_Forum" FOREIGN KEY
+--	("threadid") REFERENCES "Forum" ("threadid"),
 
-	CONSTRAINT "FK_Post_User" FOREIGN KEY
-	("userid") REFERENCES "Users" ("userid")	
-);
+--	CONSTRAINT "FK_Post_User" FOREIGN KEY
+--	("userid") REFERENCES "Users" ("userid")	
+--);
 
-select * from Post
+--select * from Post
 
 --INSERT
 ------------------------------------------------------------------------------------------------------------------------------

@@ -1,33 +1,30 @@
 ﻿
     var map, infoWindow;
-        var sandiego = {lat: 32.8227269, lng: -117.1496352 };
-        var oceanside = {lat: 33.306769, lng: -117.308317 };
+    var sandiego = {lat: 32.8227269, lng: -117.1496352 };
+    var oceanside = {lat: 33.306769, lng: -117.308317 };
     var gmarker2, gmarker3;
-        //var whereAmI = <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-        //    width="22" height="22"
-        //    viewBox="0 0 172 172"
-        //    style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M86,165.55c-43.8643,0 -79.55,-35.6857 -79.55,-79.55c0,-43.8643 35.6857,-79.55 79.55,-79.55c43.8643,0 79.55,35.6857 79.55,79.55c0,43.8643 -35.6857,79.55 -79.55,79.55z" fill="#ffffff"></path><path d="M86,8.6c42.6775,0 77.4,34.7225 77.4,77.4c0,42.6775 -34.7225,77.4 -77.4,77.4c-42.6775,0 -77.4,-34.7225 -77.4,-77.4c0,-42.6775 34.7225,-77.4 77.4,-77.4M86,4.3c-45.1199,0 -81.7,36.5801 -81.7,81.7c0,45.1199 36.5801,81.7 81.7,81.7c45.1199,0 81.7,-36.5801 81.7,-81.7c0,-45.1199 -36.5801,-81.7 -81.7,-81.7z" fill="#3498db"></path><g fill="#3498db"><path d="M86,64.5c-11.87412,0 -21.5,9.62588 -21.5,21.5c0,11.87412 9.62588,21.5 21.5,21.5c11.87412,0 21.5,-9.62588 21.5,-21.5c0,-11.87412 -9.62588,-21.5 -21.5,-21.5z"></path></g></g></g></svg>;
+
         //Center button
         function CenterControl(controlDiv, map) {
             // Set CSS for the control border.
             var controlUI = document.createElement('div');
-    controlUI.style.backgroundImage = "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzAiIGhlaWdodD0iMzAiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzM0OThkYiI+PHBhdGggZD0iTTg1LjkxMDQyLDUuNjU0OTVjLTMuMTYyMDMsMC4wNDk0MyAtNS42ODcwNSwyLjY0OTYgLTUuNjQzNzUsNS44MTE3MnY2LjAyNDQ4Yy0zMy4zNTgyNywyLjc3Mzk3IC02MC4wMTU3NCwyOS40MjExIC02Mi43ODY3Miw2Mi43NzU1MmgtNi4wMTMyOGMtMi4wNjc2NSwtMC4wMjkyNCAtMy45OTA4NywxLjA1NzA5IC01LjAzMzIyLDIuODQzYy0xLjA0MjM2LDEuNzg1OTIgLTEuMDQyMzYsMy45OTQ3NCAwLDUuNzgwNjZjMS4wNDIzNiwxLjc4NTkyIDIuOTY1NTgsMi44NzIyNSA1LjAzMzIyLDIuODQzaDYuMDI0NDhjMi43NzM3MSwzMy4zNTUxMyAyOS40MjAzOSw2MC4wMDE4MSA2Mi43NzU1Miw2Mi43NzU1MnY2LjAyNDQ4Yy0wLjAyOTI0LDIuMDY3NjUgMS4wNTcwOSwzLjk5MDg3IDIuODQzLDUuMDMzMjJjMS43ODU5MiwxLjA0MjM2IDMuOTk0NzQsMS4wNDIzNiA1Ljc4MDY2LDBjMS43ODU5MiwtMS4wNDIzNiAyLjg3MjI1LC0yLjk2NTU4IDIuODQzLC01LjAzMzIydi02LjAyNDQ4YzMzLjM1NTEzLC0yLjc3MzcxIDYwLjAwMTgxLC0yOS40MjAzOSA2Mi43NzU1MiwtNjIuNzc1NTJoNi4wMjQ0OGMyLjA2NzY1LDAuMDI5MjQgMy45OTA4NywtMS4wNTcwOSA1LjAzMzIyLC0yLjg0M2MxLjA0MjM2LC0xLjc4NTkyIDEuMDQyMzYsLTMuOTk0NzQgMCwtNS43ODA2NmMtMS4wNDIzNiwtMS43ODU5MiAtMi45NjU1OCwtMi44NzIyNSAtNS4wMzMyMiwtMi44NDNoLTYuMDEzMjhjLTIuNzcwOTgsLTMzLjM1NDQyIC0yOS40Mjg0NSwtNjAuMDAxNTUgLTYyLjc4NjcyLC02Mi43NzU1MnYtNi4wMjQ0OGMwLjAyMTIyLC0xLjU0OTcyIC0wLjU4NTgxLC0zLjA0MjAzIC0xLjY4Mjc5LC00LjEzNjljLTEuMDk2OTgsLTEuMDk0ODcgLTIuNTkwNDUsLTEuNjk5MDMgLTQuMTQwMTMsLTEuNjc0ODJ6TTgwLjI2NjY3LDI4Ljk0NjYxdjUuNDUzMzljLTAuMDI5MjQsMi4wNjc2NSAxLjA1NzA5LDMuOTkwODcgMi44NDMsNS4wMzMyMmMxLjc4NTkyLDEuMDQyMzYgMy45OTQ3NCwxLjA0MjM2IDUuNzgwNjYsMGMxLjc4NTkyLC0xLjA0MjM2IDIuODcyMjUsLTIuOTY1NTggMi44NDMsLTUuMDMzMjJ2LTUuNDUzMzljMjcuMTM3MTYsMi42ODEyNyA0OC42Mjg5NiwyNC4xODIwMSA1MS4zMDg4Niw1MS4zMjAwNWgtNS40NDIxOWMtMi4wNjc2NSwtMC4wMjkyNCAtMy45OTA4NywxLjA1NzA5IC01LjAzMzIyLDIuODQzYy0xLjA0MjM2LDEuNzg1OTIgLTEuMDQyMzYsMy45OTQ3NCAwLDUuNzgwNjZjMS4wNDIzNiwxLjc4NTkyIDIuOTY1NTgsMi44NzIyNSA1LjAzMzIyLDIuODQzaDUuNDUzMzljLTIuNjgxMTIsMjcuMTM1NiAtMjQuMTg0NDYsNDguNjM4OTMgLTUxLjMyMDA1LDUxLjMyMDA1di01LjQ1MzM5YzAuMDIxMjIsLTEuNTQ5NzIgLTAuNTg1ODEsLTMuMDQyMDMgLTEuNjgyNzksLTQuMTM2OWMtMS4wOTY5OCwtMS4wOTQ4NyAtMi41OTA0NSwtMS42OTkwMyAtNC4xNDAxMywtMS42NzQ4MmMtMy4xNjIwMywwLjA0OTQzIC01LjY4NzA1LDIuNjQ5NiAtNS42NDM3NSw1LjgxMTcydjUuNDUzMzljLTI3LjEzNTYsLTIuNjgxMTIgLTQ4LjYzODk0LC0yNC4xODQ0NiAtNTEuMzIwMDUsLTUxLjMyMDA1aDUuNDUzMzljMi4wNjc2NSwwLjAyOTI0IDMuOTkwODcsLTEuMDU3MDkgNS4wMzMyMiwtMi44NDNjMS4wNDIzNiwtMS43ODU5MiAxLjA0MjM2LC0zLjk5NDc0IDAsLTUuNzgwNjZjLTEuMDQyMzYsLTEuNzg1OTIgLTIuOTY1NTgsLTIuODcyMjUgLTUuMDMzMjIsLTIuODQzaC01LjQ0MjE5YzIuNjc5ODksLTI3LjEzODA1IDI0LjE3MTY5LC00OC42Mzg3OCA1MS4zMDg4NSwtNTEuMzIwMDV6TTg2LDYzLjA2NjY3Yy0xMi42NjU3MywwIC0yMi45MzMzMywxMC4yNjc2IC0yMi45MzMzMywyMi45MzMzM2MwLDEyLjY2NTczIDEwLjI2NzYsMjIuOTMzMzMgMjIuOTMzMzMsMjIuOTMzMzNjMTIuNjY1NzMsMCAyMi45MzMzMywtMTAuMjY3NiAyMi45MzMzMywtMjIuOTMzMzNjMCwtMTIuNjY1NzMgLTEwLjI2NzYsLTIyLjkzMzMzIC0yMi45MzMzMywtMjIuOTMzMzN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=)";
-    controlUI.style.backgroundColor = 'white';
-    controlUI.style.backgroundRepeat = 'no-repeat';
-    controlUI.style.backgroundPositionX = '8px';
-    controlUI.style.backgroundPositionY = '7px';
-    controlUI.style.borderRadius = '50%';
-    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-    controlUI.style.cursor = 'pointer';
-    controlUI.style.marginRight = '10px';
-    controlUI.style.marginBottom = '10px';
-    controlUI.style.textAlign = 'center';
-    controlUI.style.width = '45px';
-    controlUI.style.height = '45px';
-    controlUI.title = 'Center Me Button';
-    controlDiv.appendChild(controlUI);
+                controlUI.style.backgroundImage = "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMzAiIGhlaWdodD0iMzAiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzM0OThkYiI+PHBhdGggZD0iTTg1LjkxMDQyLDUuNjU0OTVjLTMuMTYyMDMsMC4wNDk0MyAtNS42ODcwNSwyLjY0OTYgLTUuNjQzNzUsNS44MTE3MnY2LjAyNDQ4Yy0zMy4zNTgyNywyLjc3Mzk3IC02MC4wMTU3NCwyOS40MjExIC02Mi43ODY3Miw2Mi43NzU1MmgtNi4wMTMyOGMtMi4wNjc2NSwtMC4wMjkyNCAtMy45OTA4NywxLjA1NzA5IC01LjAzMzIyLDIuODQzYy0xLjA0MjM2LDEuNzg1OTIgLTEuMDQyMzYsMy45OTQ3NCAwLDUuNzgwNjZjMS4wNDIzNiwxLjc4NTkyIDIuOTY1NTgsMi44NzIyNSA1LjAzMzIyLDIuODQzaDYuMDI0NDhjMi43NzM3MSwzMy4zNTUxMyAyOS40MjAzOSw2MC4wMDE4MSA2Mi43NzU1Miw2Mi43NzU1MnY2LjAyNDQ4Yy0wLjAyOTI0LDIuMDY3NjUgMS4wNTcwOSwzLjk5MDg3IDIuODQzLDUuMDMzMjJjMS43ODU5MiwxLjA0MjM2IDMuOTk0NzQsMS4wNDIzNiA1Ljc4MDY2LDBjMS43ODU5MiwtMS4wNDIzNiAyLjg3MjI1LC0yLjk2NTU4IDIuODQzLC01LjAzMzIydi02LjAyNDQ4YzMzLjM1NTEzLC0yLjc3MzcxIDYwLjAwMTgxLC0yOS40MjAzOSA2Mi43NzU1MiwtNjIuNzc1NTJoNi4wMjQ0OGMyLjA2NzY1LDAuMDI5MjQgMy45OTA4NywtMS4wNTcwOSA1LjAzMzIyLC0yLjg0M2MxLjA0MjM2LC0xLjc4NTkyIDEuMDQyMzYsLTMuOTk0NzQgMCwtNS43ODA2NmMtMS4wNDIzNiwtMS43ODU5MiAtMi45NjU1OCwtMi44NzIyNSAtNS4wMzMyMiwtMi44NDNoLTYuMDEzMjhjLTIuNzcwOTgsLTMzLjM1NDQyIC0yOS40Mjg0NSwtNjAuMDAxNTUgLTYyLjc4NjcyLC02Mi43NzU1MnYtNi4wMjQ0OGMwLjAyMTIyLC0xLjU0OTcyIC0wLjU4NTgxLC0zLjA0MjAzIC0xLjY4Mjc5LC00LjEzNjljLTEuMDk2OTgsLTEuMDk0ODcgLTIuNTkwNDUsLTEuNjk5MDMgLTQuMTQwMTMsLTEuNjc0ODJ6TTgwLjI2NjY3LDI4Ljk0NjYxdjUuNDUzMzljLTAuMDI5MjQsMi4wNjc2NSAxLjA1NzA5LDMuOTkwODcgMi44NDMsNS4wMzMyMmMxLjc4NTkyLDEuMDQyMzYgMy45OTQ3NCwxLjA0MjM2IDUuNzgwNjYsMGMxLjc4NTkyLC0xLjA0MjM2IDIuODcyMjUsLTIuOTY1NTggMi44NDMsLTUuMDMzMjJ2LTUuNDUzMzljMjcuMTM3MTYsMi42ODEyNyA0OC42Mjg5NiwyNC4xODIwMSA1MS4zMDg4Niw1MS4zMjAwNWgtNS40NDIxOWMtMi4wNjc2NSwtMC4wMjkyNCAtMy45OTA4NywxLjA1NzA5IC01LjAzMzIyLDIuODQzYy0xLjA0MjM2LDEuNzg1OTIgLTEuMDQyMzYsMy45OTQ3NCAwLDUuNzgwNjZjMS4wNDIzNiwxLjc4NTkyIDIuOTY1NTgsMi44NzIyNSA1LjAzMzIyLDIuODQzaDUuNDUzMzljLTIuNjgxMTIsMjcuMTM1NiAtMjQuMTg0NDYsNDguNjM4OTMgLTUxLjMyMDA1LDUxLjMyMDA1di01LjQ1MzM5YzAuMDIxMjIsLTEuNTQ5NzIgLTAuNTg1ODEsLTMuMDQyMDMgLTEuNjgyNzksLTQuMTM2OWMtMS4wOTY5OCwtMS4wOTQ4NyAtMi41OTA0NSwtMS42OTkwMyAtNC4xNDAxMywtMS42NzQ4MmMtMy4xNjIwMywwLjA0OTQzIC01LjY4NzA1LDIuNjQ5NiAtNS42NDM3NSw1LjgxMTcydjUuNDUzMzljLTI3LjEzNTYsLTIuNjgxMTIgLTQ4LjYzODk0LC0yNC4xODQ0NiAtNTEuMzIwMDUsLTUxLjMyMDA1aDUuNDUzMzljMi4wNjc2NSwwLjAyOTI0IDMuOTkwODcsLTEuMDU3MDkgNS4wMzMyMiwtMi44NDNjMS4wNDIzNiwtMS43ODU5MiAxLjA0MjM2LC0zLjk5NDc0IDAsLTUuNzgwNjZjLTEuMDQyMzYsLTEuNzg1OTIgLTIuOTY1NTgsLTIuODcyMjUgLTUuMDMzMjIsLTIuODQzaC01LjQ0MjE5YzIuNjc5ODksLTI3LjEzODA1IDI0LjE3MTY5LC00OC42Mzg3OCA1MS4zMDg4NSwtNTEuMzIwMDV6TTg2LDYzLjA2NjY3Yy0xMi42NjU3MywwIC0yMi45MzMzMywxMC4yNjc2IC0yMi45MzMzMywyMi45MzMzM2MwLDEyLjY2NTczIDEwLjI2NzYsMjIuOTMzMzMgMjIuOTMzMzMsMjIuOTMzMzNjMTIuNjY1NzMsMCAyMi45MzMzMywtMTAuMjY3NiAyMi45MzMzMywtMjIuOTMzMzNjMCwtMTIuNjY1NzMgLTEwLjI2NzYsLTIyLjkzMzMzIC0yMi45MzMzMywtMjIuOTMzMzN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=)";
+                controlUI.style.backgroundColor = 'white';
+                controlUI.style.backgroundRepeat = 'no-repeat';
+                controlUI.style.backgroundPositionX = '8px';
+                controlUI.style.backgroundPositionY = '7px';
+                controlUI.style.borderRadius = '50%';
+                controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+                controlUI.style.cursor = 'pointer';
+                controlUI.style.marginRight = '10px';
+                controlUI.style.marginBottom = '10px';
+                controlUI.style.textAlign = 'center';
+                controlUI.style.width = '45px';
+                controlUI.style.height = '45px';
+                controlUI.title = 'Center Me Button';
+                controlDiv.appendChild(controlUI);
             if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
             var curLoc = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude

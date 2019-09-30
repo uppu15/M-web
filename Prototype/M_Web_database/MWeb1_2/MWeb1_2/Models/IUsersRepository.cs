@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace MWeb1_2.Models
 {
-    public interface IUserRepository
+    public interface IUsersRepository
     {
-        IQueryable<User> Users { get; }
+        IQueryable<Users> Userss { get; }
     }
 }

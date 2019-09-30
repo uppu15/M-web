@@ -23,6 +23,7 @@ namespace MWeb1_2
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:MwebMarkers:ConnectionString"]));
             services.AddTransient<IMarkerRepository, EFMarkerRepository>();
+            services.AddTransient<IUsersRepository, EFUserRepository>();
             services.AddMvc();
         }
 
@@ -36,7 +37,7 @@ namespace MWeb1_2
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Marker}/{action=List}/{id?}");
+                    template: "{controller=Users}/{action=Create}/{id?}");
 
             });
             SeedData.EnsurePopulated(app);
