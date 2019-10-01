@@ -1,16 +1,22 @@
-﻿@{
+﻿@*@using  Microsoft.AspNetCore.Identity
+    @inject  SignInManager<IdentityUser> SignInManager
+    @inject  UserManager<IdentityUser> SignInManager*@
+@*I saw this namespace used in Visual Studio MVC with individual
+    authenticate template and was wondering if this would work in
+    my project.  I don't think I am worthy to use this namespace yet.
+    I will be back to this later.*@
+@{
     Layout = "";
 }
 
 <!DOCTYPE html>
-<html>
 <link rel="stylesheet" type="text/css" href="~/css/MyStyleSheet.css">
 <script src="~/js/MyJavaScript.js"></script>
+<html>
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Play with google map api</title>
-
 </head>
 <body>
     <div>
@@ -30,6 +36,7 @@
                             <input type="checkbox" checked="checked" name="remember"> Remember me
                         </label>
                     </div>
+
                     <div id="LoginContainer" style="background-color:#f1f1f1">
                         <span class="psw">Forgot <a href="#">password?</a></span>
                     </div>

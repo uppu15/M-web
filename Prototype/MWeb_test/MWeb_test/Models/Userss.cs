@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MWeb_test.Models
 {
@@ -17,6 +18,7 @@ namespace MWeb_test.Models
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
         public byte[] Created { get; set; }
+        [ScaffoldColumn(false)]
         public string UserStatus { get; set; }
 
         public virtual ICollection<Comments> Comments { get; set; }
