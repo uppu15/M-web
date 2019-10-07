@@ -16,7 +16,7 @@ The purpose of this application is to empower the image features on the google m
 
 [5. Wireframe sketch](#5-wireframe-sketch)
 
-[6. TO DO](#6-to-do)
+[6. Task list](#6-task-list)
 
 ## 1. Database Diagram
 preliminary tables.
@@ -24,7 +24,7 @@ preliminary tables.
 
 I originally thought to create seperate view page for forum to have users talk about photos.  I later come to think that it will be better to have a little comment section like how facebook have it rather than having user navigate away from the photo they are looking at.
 
-![new_database](https://github.com/uppu15/M-web/blob/master/Sources/New_databasediagram.JPG?raw=true)
+![new_database](https://github.com/uppu15/M-web/blob/master/Sources/New_databasediagram20190928.JPG?raw=true)
 
 
 [Top](#table-of-contents)
