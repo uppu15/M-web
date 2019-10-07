@@ -9,22 +9,23 @@ using MWeb_test.Models;
 
 namespace MWeb_test.Controllers
 {
-    public class UserssesController : Controller
+    public class MarkersController : Controller
     {
         private readonly Mweb_DataTableFirstContext _context;
 
-        public UserssesController(Mweb_DataTableFirstContext context)
+        public MarkersController(Mweb_DataTableFirstContext context)
         {
             _context = context;
         }
 
-        // GET: Usersses
+        // GET: Markers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Userss.ToListAsync());
+            var mweb_DataTableFirstContext = _context.Markers.Include(m => m.User);
+            return View(await mweb_DataTableFirstContext.ToListAsync());
         }
 
-        // GET: Usersses/Details/5
+        // GET: Markers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +33,42 @@ namespace MWeb_test.Controllers
                 return NotFound();
             }
 
-            var userss = await _context.Userss
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (userss == null)
+            var markers = await _context.Markers
+                .Include(m => m.User)
+                .FirstOrDefaultAsync(m => m.MarkerId == id);
+            if (markers == null)
             {
                 return NotFound();
             }
 
-            return View(userss);
+            return View(markers);
         }
 
-        // GET: Usersses/Create
+        // GET: Markers/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail");
             return View();
         }
 
-        // POST: Usersses/Create
+        // POST: Markers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,UserEmail,UserPassword,Created,UserStatus")] Userss userss)
+        public async Task<IActionResult> Create([Bind("MarkerId,UserId,MarkerLat,MarkerLng,Photo,PhotoPath")] Markers markers)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userss);
+                _context.Add(markers);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userss);
+            ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail", markers.UserId);
+            return View(markers);
         }
 
-        // GET: Usersses/Edit/5
+        // GET: Markers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +76,23 @@ namespace MWeb_test.Controllers
                 return NotFound();
             }
 
-            var userss = await _context.Userss.FindAsync(id);
-            if (userss == null)
+            var markers = await _context.Markers.FindAsync(id);
+            if (markers == null)
             {
                 return NotFound();
             }
-            return View(userss);
+            ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail", markers.UserId);
+            return View(markers);
         }
 
-        // POST: Usersses/Edit/5
+        // POST: Markers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,UserEmail,UserPassword,Created,UserStatus")] Userss userss)
+        public async Task<IActionResult> Edit(int id, [Bind("MarkerId,UserId,MarkerLat,MarkerLng,Photo,PhotoPath")] Markers markers)
         {
-            if (id != userss.UserId)
+            if (id != markers.MarkerId)
             {
                 return NotFound();
             }
@@ -96,12 +101,12 @@ namespace MWeb_test.Controllers
             {
                 try
                 {
-                    _context.Update(userss);
+                    _context.Update(markers);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserssExists(userss.UserId))
+                    if (!MarkersExists(markers.MarkerId))
                     {
                         return NotFound();
                     }
@@ -112,10 +117,11 @@ namespace MWeb_test.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userss);
+            ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail", markers.UserId);
+            return View(markers);
         }
 
-        // GET: Usersses/Delete/5
+        // GET: Markers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +129,31 @@ namespace MWeb_test.Controllers
                 return NotFound();
             }
 
-            var userss = await _context.Userss
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (userss == null)
+            var markers = await _context.Markers
+                .Include(m => m.User)
+                .FirstOrDefaultAsync(m => m.MarkerId == id);
+            if (markers == null)
             {
                 return NotFound();
             }
 
-            return View(userss);
+            return View(markers);
         }
 
-        // POST: Usersses/Delete/5
+        // POST: Markers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userss = await _context.Userss.FindAsync(id);
-            _context.Userss.Remove(userss);
+            var markers = await _context.Markers.FindAsync(id);
+            _context.Markers.Remove(markers);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserssExists(int id)
+        private bool MarkersExists(int id)
         {
-            return _context.Userss.Any(e => e.UserId == id);
+            return _context.Markers.Any(e => e.MarkerId == id);
         }
     }
 }

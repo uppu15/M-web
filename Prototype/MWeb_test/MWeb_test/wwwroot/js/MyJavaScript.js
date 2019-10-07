@@ -32,6 +32,7 @@ function CenterControl(controlDiv, map) {
             // Setup the click event listeners: simply set the map to San Diego.
             controlUI.addEventListener('click', function () {
                 map.setCenter(curLoc);
+                map.setZoom(12);
             });
         });
     }
