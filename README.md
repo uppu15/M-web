@@ -78,50 +78,7 @@ See pictures
 
 ### TODO:
 
-*UI
-  
-  * Log-in sliding panel
-  * Option sliding panel
-  * Finish search panel ( auto complete feature broken )
-  * Left sliding panel
-    * create section for photos preview
-    * create section for description
-    * create section for comments
-  * Load up big photo upon click on preview section
-
-    
-* Data
-  * Finish database / tables
-    * Marker 
-      * Photos
-      * Comments
-    * User
-    * User Settings
-  * Find how to let DB talk to Maps API
-  
-* Responsive view
-  * Original purpose of this project was for enhanced use of google maps api's road view ( use in where road is not reached ).
-  
-### In Progess:
-
-* UI
-  * Log-in sliding panel
-  
-* Data
-  * Working on migrating tables into project
-  
-### Completed:
-
-* UI
-  * Log in button doesn't work as intended
-  
-  * Option button doesn't work as intended
-  
-  * Marker and Circle appears when clicked rather than hard coded location
-  
-  * Create sliding panel on left when a location is clicked
-    
-  * Create Geocode search bar
+https://github.com/uppu15/M-web/projects/1
   
 
 [Top](#table-of-contents)
