@@ -48,23 +48,27 @@ I originally thought to create seperate view page for forum to have users talk a
 [Top](#table-of-contents)
 
 ## 5. Wireframe Sketch
-First look at the UI before log in
+
 ![FirstLook](https://i.imgur.com/0aeOKFV.jpg)
+First look at the UI before log in.  I find the UI of PC version of Google Maps very simple and thus very easy to navigate around.  I purposely tried to avoid having multiple pages so the users do not have to navigate away from the map.  I decided to replicate Google's UI on my project then take away and add some according to my object for the project.
 
-Log in to see use comment section
+
 ![Logged in](https://i.imgur.com/CzdQwAh.jpg)
+Log in to see use comment section.  At first, all and only UI that will be shown to users are Google Maps default UI, left hamburger menu button and search bar which will be place on top left of the screen and log in button which will be placed on top right of the screen.  Users will still be able to locate markers and see the contents ( photo and comments if there is any ), but will not be able to upload or set settings for the google map.
 
-Use of Pin
+
 ![UsePin](https://i.imgur.com/WtI5xJp.jpg)
+Use of Pin.  Ultimately, logged-in users will be able to set option to set the distance where markers ( post ) will be shown on the map from the clicked location.  By default, my application will set it to '500' distance on Google Maps API.
 
-What is on the right?
+
 ![userbubble](https://i.imgur.com/cfVyGdU.jpg)
+What is on the right? Upon logging in, the button that was used to call panel for Log in panel will either be replaced by a account menu like edit account information or delete account, or be set to invisible.  In return, logging in also will set button for user setting panel visible.  This panel will have a welcome greeting on the top, another set of sliding panels for settings, albums and log-out. 
 
-How one can access their own album
 ![album look](https://i.imgur.com/DpyYMBr.jpg)
+How one can access their own album.  Sliding panels will be placed right below 'Settings' and 'Albums' section on option panel.  Clicking each button will trigger to have panel expanded.
 
-See pictures
 ![Image](https://i.imgur.com/TCvIXda.jpg)
+See pictures.  Just like how any other SNS will project full screen photo.  I would like to set it so that when user click location other than the photo itself, unless moving through series of photos in the marker, photo screen will be turned off and back to main page.
 
 ### 5.1 UI in work
 ![current](https://github.com/uppu15/M-web/blob/master/Sources/UI%20in%20work.JPG?raw=true)
