@@ -1,7 +1,7 @@
 # Mweb
 > Repos for project I am working on at MSSA.  This is only a reference for the future outcome.  This readme will serve me as Readme Whiteboard.
 
-The purpose of this application is to empower the image features on the google map (During research, I learned that google actually alraedy have exact same feature as my application is intending to do).  Let users upload photos ~~to almost-exact location of the location where the photo is taken,~~ so that others who visit the location on the map will have better understanding of the location.
+The purpose of this application is to empower the image features on the google map (During research, I learned that google actually alraedy have exact same feature as my application is intending to do.  However, I would like to create this project only using my own code).  Let users upload photos, so that others who visit the location will have better understanding of the location.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ The purpose of this application is to empower the image features on the google m
 
 [5. Wireframe sketch](#5-wireframe-sketch)
 
-[6. TO DO](#6-to-do)
+[6. Task list](#6-task-list)
 
 ## 1. Database Diagram
 preliminary tables.
@@ -24,7 +24,7 @@ preliminary tables.
 
 I originally thought to create seperate view page for forum to have users talk about photos.  I later come to think that it will be better to have a little comment section like how facebook have it rather than having user navigate away from the photo they are looking at.
 
-![new_database](https://github.com/uppu15/M-web/blob/master/Sources/New_databasediagram.JPG?raw=true)
+![new_database](https://github.com/uppu15/M-web/blob/master/Sources/New_databasediagram20190928.JPG?raw=true)
 
 
 [Top](#table-of-contents)
@@ -78,50 +78,7 @@ See pictures
 
 ### TODO:
 
-*UI
-  
-  * Log-in sliding panel
-  * Option sliding panel
-  * Finish search panel ( auto complete feature broken )
-  * Left sliding panel
-    * create section for photos preview
-    * create section for description
-    * create section for comments
-  * Load up big photo upon click on preview section
-
-    
-* Data
-  * Finish database / tables
-    * Marker 
-      * Photos
-      * Comments
-    * User
-    * User Settings
-  * Find how to let DB talk to Maps API
-  
-* Responsive view
-  * Original purpose of this project was for enhanced use of google maps api's road view ( use in where road is not reached ).
-  
-### In Progess:
-
-* UI
-  * Log-in sliding panel
-  
-* Data
-  * Working on migrating tables into project
-  
-### Completed:
-
-* UI
-  * Log in button doesn't work as intended
-  
-  * Option button doesn't work as intended
-  
-  * Marker and Circle appears when clicked rather than hard coded location
-  
-  * Create sliding panel on left when a location is clicked
-    
-  * Create Geocode search bar
+https://github.com/uppu15/M-web/projects/1
   
 
 [Top](#table-of-contents)
