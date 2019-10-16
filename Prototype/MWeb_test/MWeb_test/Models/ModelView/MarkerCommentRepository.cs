@@ -2,23 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+
+using MWeb_test.Models;
 
 namespace MWeb_test.Models.ModelView
 {
     public class MarkerCommentRepository
     {
-        public Markers markers { get; set; }
-        public Comments comments { get; set; }
-    }
-
-    public class DataTablestoJson
-    {
-        MarkerCommentRepository MarComRepo = new MarkerCommentRepository
-        {
-
-        };
-
-        string MarkerCommentJson = JsonConvert.SerializeObject(MarComRepo);
+        public IEnumerable<Userss> usersses { get; set; }
+        public IEnumerable<Markers> markers { get; set; }
+        public IEnumerable<Comments> comments { get; set; }
     }
 }

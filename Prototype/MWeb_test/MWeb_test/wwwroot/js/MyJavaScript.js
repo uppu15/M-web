@@ -4,6 +4,34 @@ var sandiego = { lat: 32.8227269, lng: -117.1496352 };
 var oceanside = { lat: 33.306769, lng: -117.308317 };
 var gmarker2, gmarker3;
 
+//hard code markers
+var HCMarker;
+var markers = [];
+var LatLngCollection;
+
+LatLngCollection = [
+    [32.818429, -117.150000],
+    [32.918429, -117.05000],
+    [32.718429, -117.25],
+    [32.618429, -117.35],
+    [32.7, -117.03],
+    [32.65,-117.035]
+]
+//LatLngCollection[0] = new google.maps.LatLng(32.818429, -117.150000);
+//LatLngCollection[1] = new google.maps.LatLng(32.918429, -117.05000);
+//LatLngCollection[2] = new google.maps.LatLng(32.718429, -117.25);
+//LatLngCollection[3] = new google.maps.LatLng(32.618429, -117.35);
+
+function setMarkers() {
+    for (var i = 0; i < LatLngCollection.length; i++) {
+        HCMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(LatLngCollection[i][0],LatLngCollection[i][1]),
+            map: map
+        });
+        markers.push(HCMarker);
+    }
+}
+
 //Center button
 function CenterControl(controlDiv, map) {
     // Set CSS for the control border.
@@ -48,6 +76,8 @@ function initMap() {
             position: google.maps.ControlPosition.BOTTOM_RIGHT
         }
     });
+
+    //Place a marker at clicked location on the map
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng);
     });
@@ -55,14 +85,20 @@ function initMap() {
         //dummy points near my school/library so I can check if the function works
         var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
         var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, sandiegoLatLng);
-        console.log((distance).toFixed(2));
-        if (distance > circle.radius) {
-            marker2.setVisible(false);
+
+        //Calculate each marker from event location
+        for (var j = 0; j < LatLngCollection.length; j++) {
+            var LatLngVar = new google.maps.LatLng(LatLngCollection[j][0],LatLngCollection[j][1]);
+            var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
+            console.log((distance).toFixed(2));
+            if (distance > 5000) {
+                markers[j].setVisible(false);
+            }
+            else {
+                markers[j].setVisible(true);
+            }
         }
-        else {
-            marker2.setVisible(true);
-        }
+        
         //}
         //var resultOpacity = google.maps.geometry.poly.containsLocation(sandiego, event.circle) ? google.maps.Marker.setVisible(marker2(true)) : google.maps.Marker.setVisible(marker2(false));
         //new google.maps.Marker({
@@ -74,14 +110,15 @@ function initMap() {
         //    }
         //});
     });
-    marker2 = new google.maps.Marker({
-        position: sandiego,
-        map: map
-    });
-    marker3 = new google.maps.Marker({
-        position: oceanside,
-        map: map,
-    });
+    //marker2 = new google.maps.Marker({
+    //    position: sandiego,
+    //    map: map
+    //});
+    //marker3 = new google.maps.Marker({
+    //    position: oceanside,
+    //    map: map,
+    //});
+    setMarkers();
     //    function changeMarkerOption(placeMarker(location)) {
     //    google.maps.event.addEventListener(map, 'click', function (event) {
     //        if (google.maps.geometry.poly.containsLocation(sandiego, placeMarker.circle) == true)
@@ -137,54 +174,54 @@ function initMap() {
 };
 
 //search box-----------------------------------------------------------------------------
-var card = document.getElementById('pac-card');
-var input = document.getElementById('pac-input');
-map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
-var autocomplete = new google.maps.places.Autocomplete(input);
-// Bind the map's bounds (viewport) property to the autocomplete object,
-// so that the autocomplete requests use the current map bounds for the
-// bounds option in the request.
-autocomplete.bindTo('bounds', map);
-// Set the data fields to return when the user selects a place.
-autocomplete.setFields(
-    ['address_components', 'geometry', 'icon', 'name']);
-autocomplete.addListener('place_changed', function () {
-    infowindow.close();
-    marker.setVisible(false);
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
-    }
-    // If the place has a geometry, then present it on a map.
-    if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-    } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(15);  // Why 15? Because it looks good.
-    }
-    marker.setPosition(place.geometry.location);
-    marker.setVisible(true);
-    var address = '';
-    if (place.address_components) {
-        address = [
-            (place.address_components[0] && place.address_components[0].short_name || ''),
-            (place.address_components[1] && place.address_components[1].short_name || ''),
-            (place.address_components[2] && place.address_components[2].short_name || '')
-        ].join(' ');
-    }
-    infowindowContent.children['place-icon'].src = place.icon;
-    infowindowContent.children['place-name'].textContent = place.name;
-    infowindowContent.children['place-address'].textContent = address;
-    infowindow.open(map, marker);
-});
-document.getElementById('use-strict-bounds')
-    .addEventListener('click', function () {
-        console.log('Checkbox clicked! New state=' + this.checked);
-        autocomplete.setOptions({ strictBounds: this.checked });
-    });
+//var card = document.getElementById('pac-card');
+//var input = document.getElementById('pac-input');
+//map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
+//var autocomplete = new google.maps.places.Autocomplete(input);
+//// Bind the map's bounds (viewport) property to the autocomplete object,
+//// so that the autocomplete requests use the current map bounds for the
+//// bounds option in the request.
+//autocomplete.bindTo('bounds', map);
+//// Set the data fields to return when the user selects a place.
+//autocomplete.setFields(
+//    ['address_components', 'geometry', 'icon', 'name']);
+//autocomplete.addListener('place_changed', function () {
+//    infowindow.close();
+//    marker.setVisible(false);
+//    var place = autocomplete.getPlace();
+//    if (!place.geometry) {
+//        // User entered the name of a Place that was not suggested and
+//        // pressed the Enter key, or the Place Details request failed.
+//        window.alert("No details available for input: '" + place.name + "'");
+//        return;
+//    }
+//    // If the place has a geometry, then present it on a map.
+//    if (place.geometry.viewport) {
+//        map.fitBounds(place.geometry.viewport);
+//    } else {
+//        map.setCenter(place.geometry.location);
+//        map.setZoom(15);  // Why 15? Because it looks good.
+//    }
+//    marker.setPosition(place.geometry.location);
+//    marker.setVisible(true);
+//    var address = '';
+//    if (place.address_components) {
+//        address = [
+//            (place.address_components[0] && place.address_components[0].short_name || ''),
+//            (place.address_components[1] && place.address_components[1].short_name || ''),
+//            (place.address_components[2] && place.address_components[2].short_name || '')
+//        ].join(' ');
+//    }
+//    infowindowContent.children['place-icon'].src = place.icon;
+//    infowindowContent.children['place-name'].textContent = place.name;
+//    infowindowContent.children['place-address'].textContent = address;
+//    infowindow.open(map, marker);
+//});
+//document.getElementById('use-strict-bounds')
+//    .addEventListener('click', function () {
+//        console.log('Checkbox clicked! New state=' + this.checked);
+//        autocomplete.setOptions({ strictBounds: this.checked });
+//    });
 //Marker/circle when clicked on the map-----------------------------------------------------------------
 var marker;
 var circle;
@@ -206,7 +243,7 @@ function placeMarker(location) {
             strokeOpacity: 0,
             fillColor: 'rgb(85, 142, 250)',
             fillOpacity: 0.35,
-            radius: 500
+            radius: 5000
         });
     }
 }
