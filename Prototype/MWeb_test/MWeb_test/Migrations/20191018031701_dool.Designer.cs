@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MWeb_test.Migrations
 {
     [DbContext(typeof(Mweb_DataTableFirstContext))]
-    [Migration("20190930190442_Initial")]
-    partial class Initial
+    [Migration("20191018031701_dool")]
+    partial class dool
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

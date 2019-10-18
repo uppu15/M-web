@@ -16,6 +16,14 @@ namespace MWeb_test.Models
         public decimal MarkerLng { get; set; }
         public byte[] Photo { get; set; }
         public string PhotoPath { get; set; }
+        public string MarkerJson
+        {
+            get
+            {
+                return "'{ \"MarkerLat\" : \"" + MarkerLat + "\", \"MarkerLng\"" + MarkerLng + "\", \"photo\" : \"" + Photo + "\" }'";
+                //'{"MarkerLat":32.68,"MarkerLng":-117.4,"photo":""}'
+            }
+        }
 
         public virtual Userss User { get; set; }
         public virtual ICollection<Comments> Comments { get; set; }

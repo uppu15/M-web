@@ -4,7 +4,7 @@ var sandiego = { lat: 32.8227269, lng: -117.1496352 };
 var oceanside = { lat: 33.306769, lng: -117.308317 };
 var gmarker2, gmarker3;
 
-//hard code markers
+//hard code markers---------------------------------------------------------------------------
 var HCMarker;
 var markers = [];
 var LatLngCollection;
@@ -17,6 +17,20 @@ LatLngCollection = [
     [32.7, -117.03],
     [32.65,-117.035]
 ]
+
+//sandbox
+var MarkerObj = JSON.parse('{"MarkerLat":33.355555,"MarkerLng":-118.35555,"photo":""}');
+var JsonToMarker;
+console.log(MarkerObj.MarkerLat);
+console.log(MarkerObj.MarkerLng);
+function MarkersFromDatabase() {
+    JsonToMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(MarkerObj.MarkerLat, MarkerObj.MarkerLng),
+        map: map
+    });
+}
+
+//--------------------------------------------------------------------------------------------
 //LatLngCollection[0] = new google.maps.LatLng(32.818429, -117.150000);
 //LatLngCollection[1] = new google.maps.LatLng(32.918429, -117.05000);
 //LatLngCollection[2] = new google.maps.LatLng(32.718429, -117.25);
@@ -82,16 +96,17 @@ function initMap() {
         placeMarker(event.latLng);
     });
     google.maps.event.addListener(map, 'click', function (event) {
+
         //dummy points near my school/library so I can check if the function works
-        var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
-        var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
+        //var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
+        //var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
 
         //Calculate each marker from event location
         for (var j = 0; j < LatLngCollection.length; j++) {
             var LatLngVar = new google.maps.LatLng(LatLngCollection[j][0],LatLngCollection[j][1]);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
             console.log((distance).toFixed(2));
-            if (distance > 5000) {
+            if (distance > circle.radius) {
                 markers[j].setVisible(false);
             }
             else {
@@ -119,6 +134,7 @@ function initMap() {
     //    map: map,
     //});
     setMarkers();
+    MarkersFromDatabase();
     //    function changeMarkerOption(placeMarker(location)) {
     //    google.maps.event.addEventListener(map, 'click', function (event) {
     //        if (google.maps.geometry.poly.containsLocation(sandiego, placeMarker.circle) == true)
@@ -243,7 +259,7 @@ function placeMarker(location) {
             strokeOpacity: 0,
             fillColor: 'rgb(85, 142, 250)',
             fillOpacity: 0.35,
-            radius: 5000
+            radius: 50000
         });
     }
 }
