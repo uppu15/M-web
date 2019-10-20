@@ -7,6 +7,6 @@ namespace MWeb_test.Models
 {
     public class IUserSettingsRepository
     {
-        IQueryable<UserSettings> userSettings { get; }
+        IQueryable<UserSettings> UserSettings { get; }
     }
 }

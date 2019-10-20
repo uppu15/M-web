@@ -7,6 +7,6 @@ namespace MWeb_test.Models
 {
     public class IMarkersRepository
     {
-        IQueryable<Markers> markers { get; }
+        IQueryable<Markers> Markers { get; }
     }
 }

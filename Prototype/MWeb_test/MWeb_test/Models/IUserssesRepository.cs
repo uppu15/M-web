@@ -7,6 +7,6 @@ namespace MWeb_test.Models
 {
     public class IUserssesRepository
     {
-        IQueryable<Userss> usersses { get; }
+        IQueryable<Userss> Usersses { get; }
     }
 }

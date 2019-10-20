@@ -7,8 +7,8 @@ namespace MWeb_test.Models
 {
     public class IMwebRepository
     {
-        IQueryable<Userss> usersses { get; }
-        IQueryable<Markers> markers { get; }
-        IQueryable<Comments> comments { get; }
+        IQueryable<Userss> Uersses { get; }
+        IQueryable<Markers> Markers { get; }
+        IQueryable<Comments> Comments { get; }
     }
 }

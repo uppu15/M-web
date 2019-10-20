@@ -9,8 +9,8 @@ namespace MWeb_test.Models.ModelView
 {
     public class MarkerCommentRepository
     {
-        public IEnumerable<Userss> usersses { get; set; }
-        public IEnumerable<Markers> markers { get; set; }
-        public IEnumerable<Comments> comments { get; set; }
+        public IEnumerable<Userss> Usersses { get; set; }
+        public IEnumerable<Markers> Markers { get; set; }
+        public IEnumerable<Comments> Comments { get; set; }
     }
 }

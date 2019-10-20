@@ -1,34 +1,33 @@
-﻿
-var map, infoWindow;
-var sandiego = { lat: 32.8227269, lng: -117.1496352 };
-var oceanside = { lat: 33.306769, lng: -117.308317 };
-var gmarker2, gmarker3;
+﻿var map, infoWindow;
+//var sandiego = { lat: 32.8227269, lng: -117.1496352 };
+//var oceanside = { lat: 33.306769, lng: -117.308317 };
+//var gmarker2, gmarker3;
 
 //hard code markers---------------------------------------------------------------------------
-var HCMarker;
+var JsonMarker;
 var markers = [];
-var LatLngCollection;
+//var LatLngCollection;
 
-LatLngCollection = [
-    [32.818429, -117.150000],
-    [32.918429, -117.05000],
-    [32.718429, -117.25],
-    [32.618429, -117.35],
-    [32.7, -117.03],
-    [32.65,-117.035]
-]
+//LatLngCollection = [
+//    [32.818429, -117.150000],
+//    [32.918429, -117.05000],
+//    [32.718429, -117.25],
+//    [32.618429, -117.35],
+//    [32.7, -117.03],
+//    [32.65,-117.035]
+//]
 
-//sandbox
-var MarkerObj = JSON.parse('{"MarkerLat":33.355555,"MarkerLng":-118.35555,"photo":""}');
-var JsonToMarker;
-console.log(MarkerObj.MarkerLat);
-console.log(MarkerObj.MarkerLng);
-function MarkersFromDatabase() {
-    JsonToMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(MarkerObj.MarkerLat, MarkerObj.MarkerLng),
-        map: map
-    });
-}
+//try Json string
+//var MarkerObj = JSON.parse('{"MarkerLat":33.355555,"MarkerLng":-118.35555,"photo":""}');
+//var JsonToMarker;
+//console.log(MarkerObj.MarkerLat);
+//console.log(MarkerObj.MarkerLng);
+//function MarkersFromDatabase() {
+//    JsonToMarker = new google.maps.Marker({
+//        position: new google.maps.LatLng(MarkerObj.MarkerLat, MarkerObj.MarkerLng),
+//        map: map
+//    });
+//}
 
 //--------------------------------------------------------------------------------------------
 //LatLngCollection[0] = new google.maps.LatLng(32.818429, -117.150000);
@@ -36,13 +35,16 @@ function MarkersFromDatabase() {
 //LatLngCollection[2] = new google.maps.LatLng(32.718429, -117.25);
 //LatLngCollection[3] = new google.maps.LatLng(32.618429, -117.35);
 
+var gLatLngCollection = '@Html.Raw(Model)';
+
 function setMarkers() {
+    //console.log('@Html.Raw(Model)');
     for (var i = 0; i < LatLngCollection.length; i++) {
-        HCMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(LatLngCollection[i][0],LatLngCollection[i][1]),
+        JsonMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(LatLngCollection[i].markerLat, LatLngCollection[i].markerLng),
             map: map
         });
-        markers.push(HCMarker);
+        markers.push(JsonMarker);
     }
 }
 
@@ -82,6 +84,7 @@ function CenterControl(controlDiv, map) {
 
 //initiate google maps api centered at Embry-Riddle
 function initMap() {
+    
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: { lat: 32.8195, lng: -117.14099 },
@@ -103,9 +106,9 @@ function initMap() {
 
         //Calculate each marker from event location
         for (var j = 0; j < LatLngCollection.length; j++) {
-            var LatLngVar = new google.maps.LatLng(LatLngCollection[j][0],LatLngCollection[j][1]);
+            var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
-            console.log((distance).toFixed(2));
+            //console.log((distance).toFixed(2));
             if (distance > circle.radius) {
                 markers[j].setVisible(false);
             }
@@ -134,6 +137,8 @@ function initMap() {
     //    map: map,
     //});
     setMarkers();
+    //var userObj = '@Html.Raw(Model)';
+    //console.log(userObj);
     MarkersFromDatabase();
     //    function changeMarkerOption(placeMarker(location)) {
     //    google.maps.event.addEventListener(map, 'click', function (event) {
@@ -238,6 +243,8 @@ function initMap() {
 //        console.log('Checkbox clicked! New state=' + this.checked);
 //        autocomplete.setOptions({ strictBounds: this.checked });
 //    });
+
+
 //Marker/circle when clicked on the map-----------------------------------------------------------------
 var marker;
 var circle;

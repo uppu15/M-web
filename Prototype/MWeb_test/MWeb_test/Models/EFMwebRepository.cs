@@ -14,8 +14,8 @@ namespace MWeb_test.Models
             context = ctx;
         }
 
-        public IQueryable<Userss> usersses => context.Userss;
-        public IQueryable<Markers> markers => context.Markers;
-        public IQueryable<Comments> comments => context.Comments;
+        public IQueryable<Userss> Usersses => context.Userss;
+        public IQueryable<Markers> Markers => context.Markers;
+        public IQueryable<Comments> Comments => context.Comments;
     }
 }

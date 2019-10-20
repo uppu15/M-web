@@ -18,6 +18,8 @@ namespace MWeb_test.Controllers
             _context = context;
         }
 
+        
+
         // GET: Markers
         public async Task<IActionResult> Index()
         {
@@ -77,6 +79,7 @@ namespace MWeb_test.Controllers
             }
 
             var markers = await _context.Markers.FindAsync(id);
+            //var markers = await _context.Markers;
             if (markers == null)
             {
                 return NotFound();

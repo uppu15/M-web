@@ -7,6 +7,6 @@ namespace MWeb_test.Models
 {
     public class ICommentsRepository
     {
-        IQueryable<Comments> comments { get; }
+        IQueryable<Comments> Comments { get; }
     }
 }
