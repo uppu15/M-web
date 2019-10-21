@@ -1,55 +1,5 @@
-﻿ var map, infoWindow;
-var sandiego = { lat: 32.8227269, lng: -117.1496352 };
-var oceanside = { lat: 33.306769, lng: -117.308317 };
-var gmarker2, gmarker3;
-
-//hard code markers---------------------------------------------------------------------------
-var HCMarker;
-var markers = [];
-//var LatLngCollection;
-
-//LatLngCollection = [
-//    [32.818429, -117.150000],
-//    [32.918429, -117.05000],
-//    [32.718429, -117.25],
-//    [32.618429, -117.35],
-//    [32.7, -117.03],
-//    [32.65,-117.035]
-//]
-
-//sandbox
-//var MarkerObj = JSON.parse('{"MarkerLat":33.355555,"MarkerLng":-118.35555,"photo":""}');
-//var JsonToMarker;
-//console.log(MarkerObj.MarkerLat);
-//console.log(MarkerObj.MarkerLng);
-//function MarkersFromDatabase() {
-//    JsonToMarker = new google.maps.Marker({
-//        position: new google.maps.LatLng(MarkerObj.MarkerLat, MarkerObj.MarkerLng),
-//        map: map
-//    });
-//}
-
-//console.log("@Model");
-
-//--------------------------------------------------------------------------------------------
-//LatLngCollection[0] = new google.maps.LatLng(32.818429, -117.150000);
-//LatLngCollection[1] = new google.maps.LatLng(32.918429, -117.05000);
-//LatLngCollection[2] = new google.maps.LatLng(32.718429, -117.25);
-//LatLngCollection[3] = new google.maps.LatLng(32.618429, -117.35);
-        var LatLngCollection = JSON.parse('@Html.Raw(Json.Serialize(Model))');
-
-function setMarkers() {
-    //LatLngCollection.forEach((LatLng) => { console.log(LatLng) });
-    //console.log('@Html.Raw(Model)');
-    for (var i = 0; i < LatLngCollection.length; i++) {
-        console.log(LatLngCollection[i]);
-        HCMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(LatLngCollection[i].markerLat, LatLngCollection[i].markerLng),
-            map: map
-        });
-        markers.push(HCMarker);
-    }
-}
+﻿//This is reading from Js
+var map, infoWindow;
 
 //Center button
 function CenterControl(controlDiv, map) {
@@ -87,7 +37,6 @@ function CenterControl(controlDiv, map) {
 
 //initiate google maps api centered at Embry-Riddle
 function initMap() {
-
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: { lat: 32.8195, lng: -117.14099 },
@@ -101,16 +50,11 @@ function initMap() {
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng);
     });
+
     google.maps.event.addListener(map, 'click', function (event) {
-
-        //dummy points near my school/library so I can check if the function works
-        //var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
-        //var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
-        //var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
-
         //Calculate each marker from event location
         for (var j = 0; j < LatLngCollection.length; j++) {
-            var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat,LatLngCollection[j].markerLng);
+            var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
             console.log((distance).toFixed(2));
             if (distance > circle.radius) {
@@ -120,43 +64,10 @@ function initMap() {
                 markers[j].setVisible(true);
             }
         }
-
-        //}
-        //var resultOpacity = google.maps.geometry.poly.containsLocation(sandiego, event.circle) ? google.maps.Marker.setVisible(marker2(true)) : google.maps.Marker.setVisible(marker2(false));
-        //new google.maps.Marker({
-        //    position: sandiego,
-        //    map: map,
-        //    icon: {
-        //        opacity: resultOpacity,
-        //        scale: 2
-        //    }
-        //});
     });
-    //marker2 = new google.maps.Marker({
-    //    position: sandiego,
-    //    map: map
-    //});
-    //marker3 = new google.maps.Marker({
-    //    position: oceanside,
-    //    map: map,
-    //});
+
     setMarkers();
-    @*var userObj = '@Html.Raw(Model)';
-    console.log(userObj);*@
-    //MarkersFromDatabase();
-    //    function changeMarkerOption(placeMarker(location)) {
-    //    google.maps.event.addEventListener(map, 'click', function (event) {
-    //        if (google.maps.geometry.poly.containsLocation(sandiego, placeMarker.circle) == true)
-    //            marker2.setOptions({
-    //                opacity: 1
-    //            });
-    //        else {
-    //            marker2.setOptions({
-    //                opacity: 0
-    //            });
-    //        }
-    //    }
-    //}
+
     infoWindow = new google.maps.InfoWindow;
     //check for geolocation(user's current location)
     if (navigator.geolocation) {
@@ -308,3 +219,93 @@ window.onclick = function (event) {
         document.getElementById("LeftHamburger").style.width = '0px';
     }
 }
+
+//LatLngCollection[0] = new google.maps.LatLng(32.818429, -117.150000);
+//LatLngCollection[1] = new google.maps.LatLng(32.918429, -117.05000);
+//LatLngCollection[2] = new google.maps.LatLng(32.718429, -117.25);
+//LatLngCollection[3] = new google.maps.LatLng(32.618429, -117.35);
+
+//dummy points near my school/library so I can check if the function works
+//var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
+//var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
+//var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
+
+//var LatLngCollection;
+
+//LatLngCollection = [
+//    [32.818429, -117.150000],
+//    [32.918429, -117.05000],
+//    [32.718429, -117.25],
+//    [32.618429, -117.35],
+//    [32.7, -117.03],
+//    [32.65,-117.035]
+//]
+
+//sandbox
+//var MarkerObj = JSON.parse('{"MarkerLat":33.355555,"MarkerLng":-118.35555,"photo":""}');
+//var JsonToMarker;
+//console.log(MarkerObj.MarkerLat);
+//console.log(MarkerObj.MarkerLng);
+//function MarkersFromDatabase() {
+//    JsonToMarker = new google.maps.Marker({
+//        position: new google.maps.LatLng(MarkerObj.MarkerLat, MarkerObj.MarkerLng),
+//        map: map
+//    });
+//}
+//var sandiego = { lat: 32.8227269, lng: -117.1496352 };
+//var oceanside = { lat: 33.306769, lng: -117.308317 };
+//var gmarker2, gmarker3;
+//console.log("@Model");
+//marker2 = new google.maps.Marker({
+//    position: sandiego,
+//    map: map
+//});
+//marker3 = new google.maps.Marker({
+//    position: oceanside,
+//    map: map,
+//});
+//var userObj = '@Html.Raw(Model)';
+//console.log(userObj);
+//MarkersFromDatabase();
+//    function changeMarkerOption(placeMarker(location)) {
+//    google.maps.event.addEventListener(map, 'click', function (event) {
+//        if (google.maps.geometry.poly.containsLocation(sandiego, placeMarker.circle) == true)
+//            marker2.setOptions({
+//                opacity: 1
+//            });
+//        else {
+//            marker2.setOptions({
+//                opacity: 0
+//            });
+//        }
+//    }
+//}
+
+//}
+//var resultOpacity = google.maps.geometry.poly.containsLocation(sandiego, event.circle) ? google.maps.Marker.setVisible(marker2(true)) : google.maps.Marker.setVisible(marker2(false));
+//new google.maps.Marker({
+//    position: sandiego,
+//    map: map,
+//    icon: {
+//        opacity: resultOpacity,
+//        scale: 2
+//    }
+//});
+//LatLngCollection.forEach((LatLng) => { console.log(LatLng) });
+//console.log('@Html.Raw(Model)');
+
+//hard code markers---------------------------------------------------------------------------
+//var HCMarker;
+//var markers = [];
+//var LatLngCollection = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+
+//function setMarkers() {
+//    for (var i = 0; i < LatLngCollection.length; i++) {
+//        console.log(LatLngCollection[i]);
+//        HCMarker = new google.maps.Marker({
+//            position: new google.maps.LatLng(LatLngCollection[i].markerLat, LatLngCollection[i].markerLng),
+//            map: map
+//        });
+//        markers.push(HCMarker);
+//    }
+//}
