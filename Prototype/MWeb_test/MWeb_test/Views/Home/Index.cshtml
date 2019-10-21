@@ -6,6 +6,7 @@
 
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="~/css/MyStyleSheet.css">
+@*<script src="~/js/MyJavaScript.js"></script>*@
 <html>
 <head>
     <style>
@@ -119,13 +120,13 @@
 
     </div>
     <script>
-        var map, infoWindow;
-var sandiego = { lat: 32.8227269, lng: -117.1496352 };
-var oceanside = { lat: 33.306769, lng: -117.308317 };
-var gmarker2, gmarker3;
+//        var map, infoWindow;
+//var sandiego = { lat: 32.8227269, lng: -117.1496352 };
+//var oceanside = { lat: 33.306769, lng: -117.308317 };
+//var gmarker2, gmarker3;
 
-//hard code markers---------------------------------------------------------------------------
-var HCMarker;
+////hard code markers---------------------------------------------------------------------------
+//var HCMarker;
 var markers = [];
 //var LatLngCollection;
 
@@ -160,8 +161,6 @@ var markers = [];
         var LatLngCollection = JSON.parse('@Html.Raw(Json.Serialize(Model))');
 
 function setMarkers() {
-
-
     //LatLngCollection.forEach((LatLng) => { console.log(LatLng) });
     //console.log('@Html.Raw(Model)');
     for (var i = 0; i < LatLngCollection.length; i++) {
@@ -255,17 +254,7 @@ function initMap() {
         //    }
         //});
     });
-    //marker2 = new google.maps.Marker({
-    //    position: sandiego,
-    //    map: map
-    //});
-    //marker3 = new google.maps.Marker({
-    //    position: oceanside,
-    //    map: map,
-    //});
     setMarkers();
-    @*var userObj = '@Html.Raw(Model)';
-    console.log(userObj);*@
     //MarkersFromDatabase();
     //    function changeMarkerOption(placeMarker(location)) {
     //    google.maps.event.addEventListener(map, 'click', function (event) {
@@ -394,7 +383,9 @@ function placeMarker(location) {
             radius: 50000
         });
     }
-}
+        }
+
+//UI--------------------------------------------------------------------------------------------
 function toggleLoginSidePanel() {
     if (document.getElementById("LoginSidePanel").style.width == '300px') {
         document.getElementById("LoginSidePanel").style.width = '0px';
@@ -432,6 +423,15 @@ window.onclick = function (event) {
     }
 }
 
+
+    //marker2 = new google.maps.Marker({
+    //    position: sandiego,
+    //    map: map
+    //});
+    //marker3 = new google.maps.Marker({
+    //    position: oceanside,
+    //    map: map,
+    //});
 
     </script>
     @*I found out that I needed to implement library myself after dealing with source code for 4 weeks. wonderful. *@

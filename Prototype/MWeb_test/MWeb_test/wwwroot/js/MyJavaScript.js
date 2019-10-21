@@ -1,10 +1,10 @@
-﻿var map, infoWindow;
-//var sandiego = { lat: 32.8227269, lng: -117.1496352 };
-//var oceanside = { lat: 33.306769, lng: -117.308317 };
-//var gmarker2, gmarker3;
+﻿ var map, infoWindow;
+var sandiego = { lat: 32.8227269, lng: -117.1496352 };
+var oceanside = { lat: 33.306769, lng: -117.308317 };
+var gmarker2, gmarker3;
 
 //hard code markers---------------------------------------------------------------------------
-var JsonMarker;
+var HCMarker;
 var markers = [];
 //var LatLngCollection;
 
@@ -17,7 +17,7 @@ var markers = [];
 //    [32.65,-117.035]
 //]
 
-//try Json string
+//sandbox
 //var MarkerObj = JSON.parse('{"MarkerLat":33.355555,"MarkerLng":-118.35555,"photo":""}');
 //var JsonToMarker;
 //console.log(MarkerObj.MarkerLat);
@@ -29,22 +29,25 @@ var markers = [];
 //    });
 //}
 
+//console.log("@Model");
+
 //--------------------------------------------------------------------------------------------
 //LatLngCollection[0] = new google.maps.LatLng(32.818429, -117.150000);
 //LatLngCollection[1] = new google.maps.LatLng(32.918429, -117.05000);
 //LatLngCollection[2] = new google.maps.LatLng(32.718429, -117.25);
 //LatLngCollection[3] = new google.maps.LatLng(32.618429, -117.35);
-
-var gLatLngCollection = '@Html.Raw(Model)';
+        var LatLngCollection = JSON.parse('@Html.Raw(Json.Serialize(Model))');
 
 function setMarkers() {
+    //LatLngCollection.forEach((LatLng) => { console.log(LatLng) });
     //console.log('@Html.Raw(Model)');
     for (var i = 0; i < LatLngCollection.length; i++) {
-        JsonMarker = new google.maps.Marker({
+        console.log(LatLngCollection[i]);
+        HCMarker = new google.maps.Marker({
             position: new google.maps.LatLng(LatLngCollection[i].markerLat, LatLngCollection[i].markerLng),
             map: map
         });
-        markers.push(JsonMarker);
+        markers.push(HCMarker);
     }
 }
 
@@ -84,7 +87,7 @@ function CenterControl(controlDiv, map) {
 
 //initiate google maps api centered at Embry-Riddle
 function initMap() {
-    
+
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: { lat: 32.8195, lng: -117.14099 },
@@ -103,12 +106,13 @@ function initMap() {
         //dummy points near my school/library so I can check if the function works
         //var sandiegoLatLng = new google.maps.LatLng(sandiego.lat, sandiego.lng);
         //var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
+        //var oceansideLatLng = new google.maps.LatLng(oceanside.lat, oceanside.lng);
 
         //Calculate each marker from event location
         for (var j = 0; j < LatLngCollection.length; j++) {
-            var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
+            var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat,LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
-            //console.log((distance).toFixed(2));
+            console.log((distance).toFixed(2));
             if (distance > circle.radius) {
                 markers[j].setVisible(false);
             }
@@ -116,7 +120,7 @@ function initMap() {
                 markers[j].setVisible(true);
             }
         }
-        
+
         //}
         //var resultOpacity = google.maps.geometry.poly.containsLocation(sandiego, event.circle) ? google.maps.Marker.setVisible(marker2(true)) : google.maps.Marker.setVisible(marker2(false));
         //new google.maps.Marker({
@@ -137,9 +141,9 @@ function initMap() {
     //    map: map,
     //});
     setMarkers();
-    //var userObj = '@Html.Raw(Model)';
-    //console.log(userObj);
-    MarkersFromDatabase();
+    @*var userObj = '@Html.Raw(Model)';
+    console.log(userObj);*@
+    //MarkersFromDatabase();
     //    function changeMarkerOption(placeMarker(location)) {
     //    google.maps.event.addEventListener(map, 'click', function (event) {
     //        if (google.maps.geometry.poly.containsLocation(sandiego, placeMarker.circle) == true)
@@ -243,8 +247,6 @@ function initMap() {
 //        console.log('Checkbox clicked! New state=' + this.checked);
 //        autocomplete.setOptions({ strictBounds: this.checked });
 //    });
-
-
 //Marker/circle when clicked on the map-----------------------------------------------------------------
 var marker;
 var circle;
@@ -306,4 +308,3 @@ window.onclick = function (event) {
         document.getElementById("LeftHamburger").style.width = '0px';
     }
 }
-
