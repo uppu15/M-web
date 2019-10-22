@@ -1,7 +1,4 @@
-﻿//This is reading from Js
-var map, infoWindow;
-
-//Center button
+﻿//Center button
 function CenterControl(controlDiv, map) {
     // Set CSS for the control border.
     var controlUI = document.createElement('div');
@@ -35,85 +32,50 @@ function CenterControl(controlDiv, map) {
     }
 }
 
-//initiate google maps api centered at Embry-Riddle
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
-        center: { lat: 32.8195, lng: -117.14099 },
-        fullscreenControl: false,
-        mapTypeControlOptions: {
-            position: google.maps.ControlPosition.BOTTOM_RIGHT
-        }
-    });
-
-    //Place a marker at clicked location on the map
-    google.maps.event.addListener(map, 'click', function (event) {
-        placeMarker(event.latLng);
-    });
-
-    google.maps.event.addListener(map, 'click', function (event) {
-        //Calculate each marker from event location
-        for (var j = 0; j < LatLngCollection.length; j++) {
-            var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
-            var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
-            console.log((distance).toFixed(2));
-            if (distance > circle.radius) {
-                markers[j].setVisible(false);
-            }
-            else {
-                markers[j].setVisible(true);
-            }
-        }
-    });
-
-    setMarkers();
-
-    infoWindow = new google.maps.InfoWindow;
-    //check for geolocation(user's current location)
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var curLoc = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            //User location marker that will be placed on the map
-            var myLocMarker = new google.maps.Marker({
-                position: curLoc,
-                icon: {
-                    path: google.maps.SymbolPath.BACKWARD_OPEN_ARROW,
-                    scale: 3
-                },
-                map: map
-            })
-            //place marker, and center map to curLoc
-            infoWindow.setContent(myLocMarker);
-            infoWindow.open(map);
-            map.setCenter(curLoc);
-        },
-            function () {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
+//side panels
+function toggleLoginSidePanel() {
+    if (document.getElementById("LoginSidePanel").style.width == '300px') {
+        document.getElementById("LoginSidePanel").style.width = '0px';
     } else {
-        handleLocationError(false, infoWindow, map.getCenter());
+        document.getElementById("LoginSidePanel").style.width = '300px';
     }
-    function handleLocationError(browserHasGeolocation, infoWindow, curLoc) {
-        infoWindow.setPosition(curLoc);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The geolocation service failed.' :
-            'Error: Your browser does not support geolocation.');
-        infoWindow.open(map);
+}
+function toggleOptionSidePanel() {
+    if (document.getElementById("OptionPanel").style.width == '300px') {
+        document.getElementById("OptionPanel").style.width = '0px';
+    } else {
+        document.getElementById("OptionPanel").style.width = '300px';
     }
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map);
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv);
-};
+}
+function toggleLeftHamburger() {
+    if (document.getElementById("LeftHamburger").style.width == '61%') {
+        document.getElementById("LeftHamburger").style.width = '0px';
+    } else {
+        document.getElementById("LeftHamburger").style.width = '61%';
+    }
+}
+window.onclick = function (event) {
+    if (event.target != LoginSidePanel) {
+        document.getElementById("LoginSidePanel").style.width = '0px';
+    }
+}
+window.onclick = function (event) {
+    if (event.target == OptionPanel) {
+        document.getElementById("OptionPanel").style.width = '0px';
+    }
+}
+window.onclick = function (event) {
+    if (event.target == LeftHamburger) {
+        document.getElementById("LeftHamburger").style.width = '0px';
+    }
+}
 
 //search box-----------------------------------------------------------------------------
 //var card = document.getElementById('pac-card');
 //var input = document.getElementById('pac-input');
 //map.controls[google.maps.ControlPosition.LEFT_TOP].push(card);
 //var autocomplete = new google.maps.places.Autocomplete(input);
+
 //// Bind the map's bounds (viewport) property to the autocomplete object,
 //// so that the autocomplete requests use the current map bounds for the
 //// bounds option in the request.
@@ -158,64 +120,4 @@ function initMap() {
 //        console.log('Checkbox clicked! New state=' + this.checked);
 //        autocomplete.setOptions({ strictBounds: this.checked });
 //    });
-//Marker/circle when clicked on the map-----------------------------------------------------------------
-var marker;
-var circle;
-//Create marker at clicked location
-//Create circle at clicked location
-function placeMarker(location) {
-    if (marker) {
-        marker.setPosition(location);
-        circle.setCenter(location);
-    } else {
-        marker = new google.maps.Marker({
-            position: location,
-            map: map
-        });
-        circle = new google.maps.Circle({
-            center: location,
-            map: map,
-            strokeColor: 'rgb(85, 142, 250)',
-            strokeOpacity: 0,
-            fillColor: 'rgb(85, 142, 250)',
-            fillOpacity: 0.35,
-            radius: 50000
-        });
-    }
-}
-function toggleLoginSidePanel() {
-    if (document.getElementById("LoginSidePanel").style.width == '300px') {
-        document.getElementById("LoginSidePanel").style.width = '0px';
-    } else {
-        document.getElementById("LoginSidePanel").style.width = '300px';
-    }
-}
-function toggleOptionSidePanel() {
-    if (document.getElementById("OptionPanel").style.width == '300px') {
-        document.getElementById("OptionPanel").style.width = '0px';
-    } else {
-        document.getElementById("OptionPanel").style.width = '300px';
-    }
-}
-function toggleLeftHamburger() {
-    if (document.getElementById("LeftHamburger").style.width == '61%') {
-        document.getElementById("LeftHamburger").style.width = '0px';
-    } else {
-        document.getElementById("LeftHamburger").style.width = '61%';
-    }
-}
-window.onclick = function (event) {
-    if (event.target != LoginSidePanel) {
-        document.getElementById("LoginSidePanel").style.width = '0px';
-    }
-}
-window.onclick = function (event) {
-    if (event.target == OptionPanel) {
-        document.getElementById("OptionPanel").style.width = '0px';
-    }
-}
-window.onclick = function (event) {
-    if (event.target == LeftHamburger) {
-        document.getElementById("LeftHamburger").style.width = '0px';
-    }
-}
+

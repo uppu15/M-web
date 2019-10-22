@@ -6,16 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MWeb_test.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace MWeb_test.Controllers
 {
     public class MarkersController : Controller
     {
         private readonly Mweb_DataTableFirstContext _context;
+        private readonly HostingEnvironment _hostingEnvironment;
 
-        public MarkersController(Mweb_DataTableFirstContext context)
+        public MarkersController(Mweb_DataTableFirstContext context,HostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         
@@ -64,6 +68,38 @@ namespace MWeb_test.Controllers
             {
                 _context.Add(markers);
                 await _context.SaveChangesAsync();
+
+                //Get bike id from Db
+                var MarkerID = markers.MarkerId;
+
+                //Get wwwrootpath to save the file on server
+                string wwwrootPath = _hostingEnvironment.WebRootPath;
+
+                //Get the uploaded files
+                var files = HttpContext.Request.Form.Files;
+
+                //Get the reference of Dbset for the marker 
+                var SavedMarker = _context.Markers.Find(MarkerID);
+
+                //Upload the files on server and save the image path of user have uploaded any file
+                if (files.Count != 0)
+                {
+                    var ImagePath = @"~/images/marker/";
+                    var Extension = Path.GetExtension(files[0].FileName);
+                    var RelativeImagePath = ImagePath + MarkerID + Extension;
+                    var AbsImagePath = Path.Combine(wwwrootPath, RelativeImagePath);
+
+                    //upload the file on server
+                    using (var fileStream = new FileStream(AbsImagePath, FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    //Set the image path on database
+                    SavedMarker.PhotoPath = RelativeImagePath;
+                    _context.SaveChanges();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail", markers.UserId);

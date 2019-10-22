@@ -6,7 +6,8 @@
 
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="~/css/MyStyleSheet.css">
-<script src="~/js/MyJavaScript.js"></script>
+<script src="~/js/Map.js"></script>
+<script src="~/js/UI.js"></script>
 <html>
 <head>
     <style>
@@ -35,6 +36,7 @@
 </head>
 <body>
     <div>
+        
         <div id="map"></div>
         <div id="LoginSidePanel" class="sidepanel">
             <div style="padding: 50px 20% 0 2%">
@@ -83,7 +85,9 @@
                 </svg>
             </button>
             <div id="pac-container">
-                <input id="pac-input" type="text" placeholder="Enter a location">
+                <div>
+                    <input id="pac-input" class="controls" style="z-index:8" type="text" placeholder="Search Box">
+                </div>
             </div>
         </div>
 
