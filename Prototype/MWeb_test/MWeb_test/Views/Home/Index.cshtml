@@ -5,30 +5,15 @@
 }
 
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="~/css/MyStyleSheet.css">
+<link rel="stylesheet" type="text/css" href="~/css/Style.css">
+<link rel="stylesheet" type="text/css" href="~/css/Buttons.css" />
+<link rel="stylesheet" type="text/css" href="~/css/Panels.css" />
 <script src="~/js/Map.js"></script>
 <script src="~/js/UI.js"></script>
 <html>
 <head>
     <style>
-        #upload_button {
-            position: absolute;
-            z-index: 8;
-            border-radius: 50%;
-            background-color: white;
-            text-align: center;
-            cursor: pointer;
-            right: 0.5em;
-            top: 9.5em;
-            padding: 8px;
-            width: 45px;
-            height: 45px;
-            display: inline-block;
-            vertical-align: middle;
-            align-items: center;
-            align-content: center;
-            border-width: 0;
-        }
+        
     </style>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -76,19 +61,17 @@
         </div>
 
         <div class="pac-card" id="pac-card">
-            <button id="leftHamburger" title="details" onclick="toggleLeftHamburger()">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                     width="20" height="20"
-                     viewBox="0 0 172 172"
-                     style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
-                </svg>
-            </button>
-            <div id="pac-container">
-                <div>
-                    <input id="pac-input" class="controls" style="z-index:8" type="text" placeholder="Search Box">
+                <button id="leftHamburger" title="details" onclick="toggleLeftHamburger()">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                         width="20" height="20"
+                         viewBox="0 0 172 172"
+                         style=" fill:#000000;">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
+                    </svg>
+                </button>
+                <div id="pac-container">
+                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                 </div>
-            </div>
         </div>
 
         <button id="Log-in_Button" title="Sign in" onclick="toggleLoginSidePanel()">

@@ -1,0 +1,73 @@
+﻿/* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+googleLogo {
+    width: 66px;
+    height: 26px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000000;
+}
+
+/* -----Login container-------------------------------------------------------------------------------------------*/
+LoginContainer {
+    padding: 16px 20% 16px 16px;
+}
+/* -----Search box------------------------------------------------------------------------------------------------*/
+.pac-card {
+    margin: 5px 0 0 5px;
+    border-radius: 10px;
+    /*box-sizing: border-box;*/
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    font-family: Roboto;
+    position: absolute;
+    z-index: 7;
+    height: 38px;
+}
+
+#pac-input {
+    position: absolute;
+    z-index: 8;
+    background-color: transparent;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    padding: 5px;
+    text-overflow: ellipsis;
+    left: 40px;
+    top: 3px;
+    border-width: 0;
+    width: inherit;
+}
+
+#pac-input:focus {
+    border-color: white;
+}
+
+/* #pac-input:focus {
+            border-color: white;
+        } */
+
+#pac-container {
+    padding: 5px;
+    padding-left: 35px;
+    z-index: 4;
+    margin-left: 32px;
+    width: 300px;
+}
