@@ -108,8 +108,9 @@ namespace MWeb_test.Controllers
                 }
 
                 _context.Add(markers);
+                await _context.SaveChangesAsync();
             }
-            return RedirectToAction("List");
+            return RedirectToAction("Index");
 
             /////////////////////////////////
             //To wwwroot

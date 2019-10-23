@@ -109,30 +109,25 @@
         var markers = [];
         var LatLngCollection = JSON.parse('@Html.Raw(Json.Serialize(Model))');
         var photoWindow, thisMarker;
-        var ListenAll = [];
         function setMarkers() {
             for (var i = 0; i < LatLngCollection.length; i++) {
-                console.log(LatLngCollection[i]);
-                //markers.push(addMarker({
-                //    position: { lat: LatLngCollection[i].markerLat, lng: LatLngCollection[i].markerLng },
-                //    content: LatLngCollection[i].photoPath
-                //}));
-                //console.log(LatLngCollection[i]);
                 thisMarker = new google.maps.Marker({
                     position: new google.maps.LatLng(LatLngCollection[i].markerLat, LatLngCollection[i].markerLng),
                     map: map
                 })
-                photoWindow = new google.maps.InfoWindow({
-                    content: LatLngCollection[i].photoPath + ' that'
-                })
                 markers.push(thisMarker);
-                console.log(markers[i]);
-                markers[i].addListener('click', function () {
-                    photoWindow.open(map, markers[i])
-                })
+                attachPhoto(thisMarker, LatLngCollection[i].photoPath);
             }
-    
-            //console.log(markers);
+        }
+
+        function attachPhoto(marker, markerContent) {
+            var infowindow = new google.maps.InfoWindow({
+                content: '<img src=https://mwebimagestor.blob.core.windows.net/images/' + markerContent + ' / img>'
+            });
+
+            marker.addListener('click', function() {
+              infowindow.open(marker.get('map'), marker);
+            });
         }
 
         //function addMarker(markerObj) {

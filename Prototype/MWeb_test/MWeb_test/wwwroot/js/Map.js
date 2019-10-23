@@ -22,7 +22,7 @@ function initMap() {
         for (var j = 0; j < LatLngCollection.length; j++) {
             var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
-            console.log(distance);
+            //console.log(distance);
             if (distance > circle.radius) {
                 //document.getElementById(markers[j]).style.visibility = "hidden";
                 markers[j].setVisible(false);
@@ -33,19 +33,20 @@ function initMap() {
         }
     });
 
-    var testMarker = new google.maps.Marker({
-        position: { lat: 32, lng: -118 },
-        map:map
-    })
-    var testWindow = new google.maps.InfoWindow({
-        content: 'this'
-    })
-    testMarker.addListener('click', function () {
-        testWindow.open(map, testMarker)
-    })
-    console.log(testMarker);
+    //var testMarker = new google.maps.Marker({
+    //    position: { lat: 32, lng: -118 },
+    //    map:map
+    //})
+    //var testWindow = new google.maps.InfoWindow({
+    //    content: 'this'
+    //})
+    //testMarker.addListener('click', function () {
+    //    testWindow.open(map, testMarker)
+    //})
+    //console.log(testMarker);
+
     //check for geolocation(user's current location)
-    infoWindow = new google.maps.InfoWindow; 
+    //infoWindow = new google.maps.InfoWindow; 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var curLoc = {
@@ -62,8 +63,8 @@ function initMap() {
                 map: map
             })
             //place marker, and center map to curLoc
-            infoWindow.setContent(myLocMarker);
-            infoWindow.open(map);
+            //infoWindow.setContent(myLocMarker);
+            //infoWindow.open(map);
             map.setCenter(curLoc);
         },
             function () {
