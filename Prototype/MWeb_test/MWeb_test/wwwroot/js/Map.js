@@ -16,13 +16,15 @@ function initMap() {
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng);
     });
-
+    
     google.maps.event.addListener(map, 'click', function (event) {
         //Calculate each marker from event location
         for (var j = 0; j < LatLngCollection.length; j++) {
             var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
+            console.log(distance);
             if (distance > circle.radius) {
+                //document.getElementById(markers[j]).style.visibility = "hidden";
                 markers[j].setVisible(false);
             }
             else {
@@ -31,8 +33,17 @@ function initMap() {
         }
     });
 
-    
-
+    var testMarker = new google.maps.Marker({
+        position: { lat: 32, lng: -118 },
+        map:map
+    })
+    var testWindow = new google.maps.InfoWindow({
+        content: 'this'
+    })
+    testMarker.addListener('click', function () {
+        testWindow.open(map, testMarker)
+    })
+    console.log(testMarker);
     //check for geolocation(user's current location)
     infoWindow = new google.maps.InfoWindow; 
     if (navigator.geolocation) {

@@ -13,7 +13,6 @@
 <html>
 <head>
     <style>
-        
     </style>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -21,7 +20,7 @@
 </head>
 <body>
     <div>
-        
+
         <div id="map"></div>
         <div id="LoginSidePanel" class="sidepanel">
             <div style="padding: 50px 20% 0 2%">
@@ -61,17 +60,17 @@
         </div>
 
         <div class="pac-card" id="pac-card">
-                <button id="leftHamburger" title="details" onclick="toggleLeftHamburger()">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                         width="20" height="20"
-                         viewBox="0 0 172 172"
-                         style=" fill:#000000;">
-                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
-                    </svg>
-                </button>
-                <div id="pac-container">
-                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                </div>
+            <button id="leftHamburger" title="details" onclick="toggleLeftHamburger()">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                     width="20" height="20"
+                     viewBox="0 0 172 172"
+                     style=" fill:#000000;">
+                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M21.5,78.83333h129v14.33333h-129zM21.5,35.83333h129v14.33333h-129zM21.5,121.83333h129v14.33333h-129z"></path></g></g>
+                </svg>
+            </button>
+            <div id="pac-container">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+            </div>
         </div>
 
         <button id="Log-in_Button" title="Sign in" onclick="toggleLoginSidePanel()">
@@ -109,17 +108,46 @@
     <script>
         var markers = [];
         var LatLngCollection = JSON.parse('@Html.Raw(Json.Serialize(Model))');
-
+        var photoWindow, thisMarker;
+        var ListenAll = [];
         function setMarkers() {
             for (var i = 0; i < LatLngCollection.length; i++) {
                 console.log(LatLngCollection[i]);
-                HCMarker = new google.maps.Marker({
+                //markers.push(addMarker({
+                //    position: { lat: LatLngCollection[i].markerLat, lng: LatLngCollection[i].markerLng },
+                //    content: LatLngCollection[i].photoPath
+                //}));
+                //console.log(LatLngCollection[i]);
+                thisMarker = new google.maps.Marker({
                     position: new google.maps.LatLng(LatLngCollection[i].markerLat, LatLngCollection[i].markerLng),
                     map: map
-                });
-                markers.push(HCMarker);
+                })
+                photoWindow = new google.maps.InfoWindow({
+                    content: LatLngCollection[i].photoPath + ' that'
+                })
+                markers.push(thisMarker);
+                console.log(markers[i]);
+                markers[i].addListener('click', function () {
+                    photoWindow.open(map, markers[i])
+                })
             }
+    
+            //console.log(markers);
         }
+
+        //function addMarker(markerObj) {
+        //    var marker = new google.maps.Marker({
+        //        position: markerObj.position,
+        //        map: map
+        //    });
+        //    var photoWindow = new google.maps.InfoWindow({
+        //        content: markerObj.content
+        //    });
+        //    marker.addListener('click', function () {
+        //        photoWindow.open(map, marker);
+        //    });
+        //}
+
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbjx5U78SGpevXKDEYCrcYT02y-81KG3Q&libraries=geometry,places&callback=initMap">

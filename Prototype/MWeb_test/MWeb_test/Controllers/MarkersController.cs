@@ -61,43 +61,8 @@ namespace MWeb_test.Controllers
         // GET: Markers/Create
         public IActionResult Create()
         {
-            //_context.Add(Markers);
-            //_context.SaveChanges();
-
             ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail");
 
-            ////Save Makrer Logic
-
-            ////Get bike id we have saved in Db
-            //var MarkerId = markers.MarkerId;
-
-            ////Get wwwrootpath to save the file on server
-            //var wwwrootPath = _hostingEnvironment.WebRootPath;
-
-            ////Get the uploaded files
-            //var files = HttpContext.Request.Form.Files;
-
-            ////Get the reference of DBSet for the bike we just have saved in Db
-            //var SavedMarker = _context.Markers.Find(MarkerId);
-
-
-            ////Upload the files on server and save the image path of user have uploaded any files
-            //if (files.Count != 0)
-            //{
-            //    var ImagePath = @"images\marker\";
-            //    var Extension = Path.GetExtension(files[0].FileName);
-            //    var RelativeImagePath = ImagePath + MarkerId + Extension;
-            //    var AbsImagePath = Path.Combine(wwwrootPath, RelativeImagePath);
-
-            //    //Upload the file on server
-            //    using(var fileStream = new FileStream(AbsImagePath, FileMode.Create))
-            //    {
-            //        files[0].CopyTo(fileStream);
-            //    }
-
-            //    SavedMarker.PhotoPath = RelativeImagePath;
-            //    _context.SaveChanges();
-            //}
             return View();
         }
 
@@ -110,14 +75,19 @@ namespace MWeb_test.Controllers
         public async Task<IActionResult> Create([Bind("MarkerId,UserId,MarkerLat,MarkerLng,Photo,PhotoPath")] Markers markers)
         {
             var files = HttpContext.Request.Form.Files;
-            string path = "wwwroot/images/marker/";
-            string extension = "";
+            bool uploadSuccess = false;
+            string uploadedUri = null;
 
+            string extension = "";
             if (files.Count == 0)
             {
-                return RedirectToAction("Create");
+                return RedirectToAction("List");
             }
-
+            ///////////////////////////////////////////////////////////////////////
+            // Gets extension from uploaded file and adds it to uniquely generated image path
+            // Only accepts jpg, png and jpeg as of right now
+            ///////////////////////////////////////////////////////////////////////
+            ///
             for (int i = files[0].FileName.Length - 1; i > 0; i--)
             {
                 if (files[0].FileName[i] == '.')
@@ -126,28 +96,65 @@ namespace MWeb_test.Controllers
                 }
                 extension = files[0].FileName[i].ToString() + extension;
             }
-
+            //checks for acceptable extensions
             extension = extension.ToLower();
             if (extension == "jpg" || extension == "jpeg" || extension == "png")
             {
                 markers.PhotoPath = Guid.NewGuid().ToString() + "." + extension;
-                path += markers.PhotoPath;
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                using (var stream = files[0].OpenReadStream())
                 {
-                    files[0].CopyTo(fileStream);
+                    (uploadSuccess, uploadedUri) = await UploadToBlob(markers.PhotoPath, stream, extension);
+                    TempData["uploadedUri"] = uploadedUri;
                 }
+
                 _context.Add(markers);
             }
+            return RedirectToAction("List");
+
+            /////////////////////////////////
+            //To wwwroot
+            /////////////////////////////////
+            
+            //var files = HttpContext.Request.Form.Files;
+            //string path = "wwwroot/images/marker/";
+            //string extension = "";
+
+            //if (files.Count == 0)
+            //{
+            //    return RedirectToAction("Create");
+            //}
+
+            //for (int i = files[0].FileName.Length - 1; i > 0; i--)
+            //{
+            //    if (files[0].FileName[i] == '.')
+            //    {
+            //        break;
+            //    }
+            //    extension = files[0].FileName[i].ToString() + extension;
+            //}
+
+            //extension = extension.ToLower();
+            //if (extension == "jpg" || extension == "jpeg" || extension == "png")
+            //{
+            //    markers.PhotoPath = Guid.NewGuid().ToString() + "." + extension;
+            //    path += markers.PhotoPath;
+            //    using (var fileStream = new FileStream(path, FileMode.Create))
+            //    {
+            //        //to wwwroot
+            //        files[0].CopyTo(fileStream);
+            //    }
+            //    _context.Add(markers);
+            //}
 
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(markers);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail", markers.UserId);
-            return View(markers);
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Add(markers);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["UserId"] = new SelectList(_context.Userss, "UserId", "UserEmail", markers.UserId);
+            //return View(markers);
         }
         private async Task<(bool, string)> UploadToBlob(string filename, Stream stream = null, string extension = "")
         {
@@ -180,7 +187,6 @@ namespace MWeb_test.Controllers
                     if (stream != null)
                     {
                         // Pass in memory stream directly
-
                         cloudBlockBlob.Properties.ContentType = "image/" + extension;
 
                         await cloudBlockBlob.UploadFromStreamAsync(stream);
