@@ -1,6 +1,5 @@
 ﻿//This is reading from Js
 var map, infoWindow;
-
 //initiate google maps api centered at Embry-Riddle
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -16,9 +15,13 @@ function initMap() {
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng);
     });
-    
+
+    //Calculate each marker from event location
+    //Determine left panel datas
     google.maps.event.addListener(map, 'click', function (event) {
-        //Calculate each marker from event location
+        var leftPanel = document.getElementById("insideLeftHamburger")
+        //leftPanel.innerHTML = '';
+        var thumbImagesInDistance = [];
         for (var j = 0; j < LatLngCollection.length; j++) {
             var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
@@ -28,10 +31,41 @@ function initMap() {
                 markers[j].setVisible(false);
             }
             else {
+                var numberOfImages = 0;
                 markers[j].setVisible(true);
+                thumbImagesInDistance.push('<img width="350" height="196" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[j].photoPath + '>')
+                //leftPanel.innerHTML += '<img width="350" height="196" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[j].photoPath + '>';
+                //console.log(imagesInDistance);
+            }
+
+        }
+        //console.log(imagesInDistance[0]);
+        addCarousel(thumbImagesInDistance);
+        //document.getElementById("imageBag").innerHTML = '<img width="350" height="196" ' + imagesInDistance[0]
+    });
+
+    function addCarousel(image) {
+        var thumbnailImageBag = document.getElementById("imageBag")
+        var allThumbNails;
+        //thumbnailImageBag.innerHTML = '<ol class="carousel-indicators">'
+        //for (var i = 0; i < imagesInDistance.length; i++) {
+        //    thumbnailImageBag.innerHTML += '<li data-target="#imageBag" data-slide-to="' + i + '" class="active"></li>'
+        //}
+        
+        if (image.length > 1) {
+            for (var i = 1; i < image.length; i++) {
+                allThumbNails +='<div class="carousel-item">' + image[i] + '</div>'
             }
         }
-    });
+        thumbnailImageBag.innerHTML = '<div class="carousel-inner"><div class="carousel-item active">' + image[0] + '</div>' + allThumbNails+ '</div><a class="carousel-control-prev" href="#imageBag" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#imageBag" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only" >Next</span ></a></div>'
+    }
+    //document.getElementById("imageBag").innerHTML = '<img width="350" height="196" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[0].photoPath + '>';
+    //function clickThroughImages(images) {
+    //    images.onclick = changeImage()
+    //}
+
+
+    //clickThroughImages(imagesInDistance);
 
     //var testMarker = new google.maps.Marker({
     //    position: { lat: 32, lng: -118 },

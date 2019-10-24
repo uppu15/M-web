@@ -54,8 +54,9 @@
         </div>
 
         <div id="LeftHamburger" class="leftSidepanel">
-            <div style="padding: 50px 0 0 2%">
-                Here comes my search box, photo share and comments share
+            <div id="insideLeftHamburger" style="padding-top: 50px; text-align:center">
+                <div id="imageBag" class="carousel slide" data-ride="carousel">
+                </div>
             </div>
         </div>
 
@@ -87,7 +88,7 @@
                      width="25" height="25"
                      viewBox="0 0 172 172"
                      style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M86,2.0425l-2.4725,2.365l-27.52,27.52c-1.37062,1.37063 -1.37062,3.57438 0,4.945c1.37063,1.37063 3.57438,1.37063 4.945,0l21.6075,-21.6075v94.815c-0.01344,1.23625 0.63156,2.39188 1.70656,3.02344c1.075,0.61813 2.39187,0.61813 3.46687,0c1.075,-0.63156 1.72,-1.78719 1.70656,-3.02344v-94.815l21.6075,21.6075c1.37063,1.37063 3.57438,1.37063 4.945,0c1.37063,-1.37062 1.37063,-3.57437 0,-4.945l-27.52,-27.52zM24.08,55.04v116.96h123.84v-116.96h-34.4c-1.23625,-0.01344 -2.39187,0.63156 -3.02344,1.70656c-0.61813,1.075 -0.61813,2.39187 0,3.46687c0.63156,1.075 1.78719,1.72 3.02344,1.70656h27.52v103.2h-110.08v-103.2h27.52c1.23625,0.01344 2.39188,-0.63156 3.02344,-1.70656c0.61813,-1.075 0.61813,-2.39187 0,-3.46687c-0.63156,-1.075 -1.78719,-1.72 -3.02344,-1.70656z"></path></g></g>
+                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-size="none"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#3498db"><path d="M86,2.0425l-2.4725,2.365l-27.52,27.52c-1.37062,1.37063 -1.37062,3.57438 0,4.945c1.37063,1.37063 3.57438,1.37063 4.945,0l21.6075,-21.6075v94.815c-0.01344,1.23625 0.63156,2.39188 1.70656,3.02344c1.075,0.61813 2.39187,0.61813 3.46687,0c1.075,-0.63156 1.72,-1.78719 1.70656,-3.02344v-94.815l21.6075,21.6075c1.37063,1.37063 3.57438,1.37063 4.945,0c1.37063,-1.37062 1.37063,-3.57437 0,-4.945l-27.52,-27.52zM24.08,55.04v116.96h123.84v-116.96h-34.4c-1.23625,-0.01344 -2.39187,0.63156 -3.02344,1.70656c-0.61813,1.075 -0.61813,2.39187 0,3.46687c0.63156,1.075 1.78719,1.72 3.02344,1.70656h27.52v103.2h-110.08v-103.2h27.52c1.23625,0.01344 2.39188,-0.63156 3.02344,-1.70656c0.61813,-1.075 0.61813,-2.39187 0,-3.46687c-0.63156,-1.075 -1.78719,-1.72 -3.02344,-1.70656z"></path></g></g>
                 </svg>
             </a>
         </button>
@@ -129,20 +130,6 @@
               infowindow.open(marker.get('map'), marker);
             });
         }
-
-        //function addMarker(markerObj) {
-        //    var marker = new google.maps.Marker({
-        //        position: markerObj.position,
-        //        map: map
-        //    });
-        //    var photoWindow = new google.maps.InfoWindow({
-        //        content: markerObj.content
-        //    });
-        //    marker.addListener('click', function () {
-        //        photoWindow.open(map, marker);
-        //    });
-        //}
-
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbjx5U78SGpevXKDEYCrcYT02y-81KG3Q&libraries=geometry,places&callback=initMap">
