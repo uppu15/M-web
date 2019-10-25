@@ -19,27 +19,19 @@ function initMap() {
     //Calculate each marker from event location
     //Determine left panel datas
     google.maps.event.addListener(map, 'click', function (event) {
-        var leftPanel = document.getElementById("insideLeftHamburger")
-        //leftPanel.innerHTML = '';
         var thumbImagesInDistance = [];
         for (var j = 0; j < LatLngCollection.length; j++) {
             var LatLngVar = new google.maps.LatLng(LatLngCollection[j].markerLat, LatLngCollection[j].markerLng);
             var distance = google.maps.geometry.spherical.computeDistanceBetween(event.latLng, LatLngVar);
-            //console.log(distance);
             if (distance > circle.radius) {
-                //document.getElementById(markers[j]).style.visibility = "hidden";
                 markers[j].setVisible(false);
             }
             else {
                 markers[j].setVisible(true);
                 thumbImagesInDistance.push('<img width="350" height="196" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[j].photoPath + '>')
-                //leftPanel.innerHTML += '<img width="350" height="196" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[j].photoPath + '>';
-                //console.log(imagesInDistance);
             }
-
         }
         addCarousel(thumbImagesInDistance);
-        //document.getElementById("imageBag").innerHTML = '<img width="350" height="196" ' + imagesInDistance[0]
     });
 
 
