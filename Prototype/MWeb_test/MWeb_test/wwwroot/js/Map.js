@@ -28,7 +28,7 @@ function initMap() {
             }
             else {
                 markers[j].setVisible(true);
-                thumbImagesInDistance.push('<img width="350" height="196" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[j].photoPath + '>')
+                thumbImagesInDistance.push('<img width="300" height="168" src=https://mwebimagestor.blob.core.windows.net/images/' + LatLngCollection[j].photoPath + '>')
             }
         }
         addCarousel(thumbImagesInDistance);
@@ -53,8 +53,6 @@ function initMap() {
                 map: map
             })
             //place marker, and center map to curLoc
-            //infoWindow.setContent(myLocMarker);
-            //infoWindow.open(map);
             map.setCenter(curLoc);
         },
             function () {

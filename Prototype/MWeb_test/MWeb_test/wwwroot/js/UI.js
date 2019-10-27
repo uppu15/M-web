@@ -32,14 +32,6 @@ function CenterControl(controlDiv, map) {
     }
 }
 
-//function PacInputLayout(PacInputDiv, map) {
-//    var pacUI = document.getElementById('pac-input');
-//    pacUI.style.zIndex = '8';
-//    pacUI.style.top = '10px';
-//    pacUI.style.left = '40px';
-//    PacInputDiv.appendChild(pacUI);
-//}
-
 //side panels
 function toggleLoginSidePanel() {
     if (document.getElementById("LoginSidePanel").style.width == '300px') {
@@ -56,10 +48,10 @@ function toggleOptionSidePanel() {
     }
 }
 function toggleLeftHamburger() {
-    if (document.getElementById("LeftHamburger").style.width == '380px') {
+    if (document.getElementById("LeftHamburger").style.width == '350px') {
         document.getElementById("LeftHamburger").style.width = '0px';
     } else {
-        document.getElementById("LeftHamburger").style.width = '380px';
+        document.getElementById("LeftHamburger").style.width = '350px';
     }
 }
 window.onclick = function (event) {
