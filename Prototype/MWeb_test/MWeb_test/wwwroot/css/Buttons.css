@@ -41,7 +41,7 @@
 
 #leftHamburger {
     position: absolute;
-    z-index: 8;
+    z-index: 11;
     background-color: white;
     vertical-align: middle;
     border-width: 0;

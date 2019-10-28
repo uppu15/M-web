@@ -6,9 +6,7 @@ function initMap() {
         zoom: 15,
         center: { lat: 32.8195, lng: -117.14099 },
         fullscreenControl: false,
-        mapTypeControlOptions: {
-            position: google.maps.ControlPosition.BOTTOM_RIGHT
-        }
+        mapTypeControl: false
     });
 
     //Place a marker at clicked location on the map

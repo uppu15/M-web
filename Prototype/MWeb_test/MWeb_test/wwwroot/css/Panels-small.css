@@ -1,9 +1,60 @@
-﻿/* -----Side Panel----------------------------------------------------------------------------------*/
+﻿/* -----Buttons --------------------------------------------------------------------------------*/
+#Log-in_Button {
+    position: absolute;
+    z-index: 11;
+    border-radius: 50%;
+    background-color: rgb(85, 142, 250);
+    text-align: center;
+    cursor: pointer;
+    right: 0.5em;
+    top: 0.5em;
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    vertical-align: middle;
+    padding-right: 10px;
+    padding-top: 5px;
+    border-width: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#Hamburger_button {
+    position: absolute;
+    z-index: 11;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    right: 0.5em;
+    top: 5em;
+    padding: 8px;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    vertical-align: middle;
+    align-items: center;
+    align-content: center;
+    border-width: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#leftHamburger {
+    position: absolute;
+    background-color: white;
+    vertical-align: middle;
+    border-width: 0;
+    margin-top: 8px;
+    margin-left: 3px;
+    display: inline-block;
+}
+
+
+/* -----Side Panel----------------------------------------------------------------------------------*/
 .sidepanel {
     height: 92%; /* Specify a height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 8; /* Stay on top */
+    z-index: 10; /* Stay on top */
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,.3);
     margin-top: 3px;
@@ -18,7 +69,7 @@
     height: 92%; /* Specify a height, make sure the panel doesn't cover up Google logo */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 5; /* Stay on top */
+    z-index: 12; /* Stay on top */
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,.3);
     top: 3px;
@@ -29,30 +80,25 @@
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
 }
 
-/* Set a style for all buttons */
-logInFormButton {
-    background-color: #4d90fe;
-    border-color: #3079ed;
-    color: white;
-    font-weight: bold;
-    margin: 10px 0 0 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
+/*.leftSidepanel--is-visible {
+    visibility: visible;
+    transition: visibility 0s 6s;
+}*/
 
 /* -----Search box------------------------------------------------------------------------------------------------*/
 .pac-card {
     margin: 5px 0 0 5px;
     border-radius: 10px;
+    /*box-sizing: border-box;*/
     -moz-box-sizing: border-box;
     outline: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     background-color: #fff;
     font-family: Roboto;
     position: absolute;
-    z-index: 7;
+    z-index: 13;
     height: 38px;
+    width: 70%;
 }
 
 #pac-input {
@@ -62,23 +108,27 @@ logInFormButton {
     font-family: Roboto;
     font-size: 15px;
     font-weight: 300;
-    padding-top: 5px;
+    padding: 5px;
     text-overflow: ellipsis;
     left: 40px;
     top: 3px;
     border-width: 0;
     width: inherit;
+    padding-right: 20px;
 }
 
 #pac-input:focus {
     border-color: white;
 }
 
+/* #pac-input:focus {
+            border-color: white;
+        } */
 
 #pac-container {
     padding: 5px;
     padding-left: 35px;
     z-index: 4;
     margin-left: 32px;
-    width: 280px;
+    width: 100%;
 }

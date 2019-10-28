@@ -48,12 +48,27 @@ function toggleOptionSidePanel() {
     }
 }
 function toggleLeftHamburger() {
-    if (document.getElementById("LeftHamburger").style.width == '350px') {
-        document.getElementById("LeftHamburger").style.width = '0px';
+    if (document.getElementById("map").clientWidth >= 396) {
+        if (document.getElementById("LeftHamburger").style.width == '330px') {
+            document.getElementById("LeftHamburger").style.width = '0px';
+        } else {
+            document.getElementById("LeftHamburger").style.width = '330px';
+        }
     } else {
-        document.getElementById("LeftHamburger").style.width = '350px';
+        if (document.getElementById("LeftHamburger").style.width == '100%') {
+            document.getElementById("LeftHamburger").style.width = '0px';
+        } else {
+            document.getElementById("LeftHamburger").style.width = '100%';
+        }
     }
 }
+//function toggleLeftHamburger() {
+//    if (document.getElementById("LeftHamburger").style.width == '340px') {
+//        document.getElementById("LeftHamburger").style.width = '0px';
+//    } else {
+//        document.getElementById("LeftHamburger").style.width = '340px';
+//    }
+//}
 window.onclick = function (event) {
     if (event.target != LoginSidePanel) {
         document.getElementById("LoginSidePanel").style.width = '0px';
