@@ -1,6 +1,5 @@
-Resources I used for my README and project itself
 
-###Entrance Criteria
+### Entrance Criteria
 
 | TestNo.      | Test Description | Test Method |
 | -----------: | :--------------- | :---------: |
