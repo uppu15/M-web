@@ -36,7 +36,7 @@ I originally thought to create seperate view page for forum to have users talk a
 [Top](#table-of-contents)
 
 ## 3. Requirements Traceability Matrix
-![RTM](https://i.imgur.com/PvkbOt7.jpg)
+https://github.com/uppu15/M-web/blob/master/Sources/RTM.xlsx
 
 
 [Top](#table-of-contents)
