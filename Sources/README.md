@@ -120,3 +120,10 @@ Resources I used for my README and project itself
 | 2.3 | | | | |
 | 2.3.1 | Failed | | 11/3/2019 | |
 | 2.3.2 | Failed | | 11/3/2019 | |
+
+67% Tests currently passed
+
+### Findings
+ - Need work on authentication / authorization
+ - Need work on comment controller / partial view
+ - All map related features (non-Users/UserSetting/Comment controllers) work as intended
