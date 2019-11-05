@@ -1,7 +1,7 @@
 # Mweb
 > Repos for project I am working on at MSSA.  This is only a reference for the future outcome.  This readme will serve me as Readme Whiteboard.
 
-Project is published on M-web.azurewebsites.net
+Project is published on https://m-web.azurewebsites.net
 
 The purpose of this application is to empower the image features on the google map (During research, I learned that google actually alraedy have exact same feature as my application is intending to do.  However, I would like to create this project only using my own code).  Let users upload photos, so that others who visit the location will have better understanding of the location.
 
