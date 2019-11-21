@@ -8,12 +8,12 @@ function initMap() {
         fullscreenControl: false,
         mapTypeControl: false
     });
-
+    console.log(LatLngCollection);
     //Place a marker at clicked location on the map
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng);
     });
-
+    
     //Calculate each marker from event location
     //Determine left panel datas
     google.maps.event.addListener(map, 'click', function (event) {

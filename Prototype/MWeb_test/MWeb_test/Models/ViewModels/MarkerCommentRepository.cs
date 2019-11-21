@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using MWeb_test.Models;
 
-namespace MWeb_test.Models.ModelView
+namespace MWeb_test.Models.ViewModels
 {
     public class MarkerCommentRepository
     {

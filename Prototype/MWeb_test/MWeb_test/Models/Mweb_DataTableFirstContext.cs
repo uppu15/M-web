@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace MWeb_test.Models
 {
-    public partial class Mweb_DataTableFirstContext : DbContext
+    public partial class Mweb_DataTableFirstContext : IdentityDbContext
     {
         public Mweb_DataTableFirstContext()
         {
@@ -76,10 +77,10 @@ namespace MWeb_test.Models
                     .HasColumnName("markerLng")
                     .HasColumnType("decimal(10, 6)");
 
-                entity.Property(e => e.Photo)
-                    .IsRequired()
-                    .HasColumnName("photo")
-                    .HasColumnType("image");
+                //entity.Property(e => e.Photo)
+                //    .IsRequired()
+                //    .HasColumnName("photo")
+                //    .HasColumnType("image");
 
                 entity.Property(e => e.PhotoPath)
                     .IsRequired()
@@ -167,6 +168,8 @@ namespace MWeb_test.Models
                     .HasMaxLength(19)
                     .IsUnicode(false);
             });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

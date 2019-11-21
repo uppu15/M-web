@@ -9,11 +9,11 @@ using MWeb_test.Models;
 
 namespace MWeb_test.Controllers
 {
-    public class UserssesController : Controller
+    public class UsersController : Controller
     {
         private readonly Mweb_DataTableFirstContext _context;
 
-        public UserssesController(Mweb_DataTableFirstContext context)
+        public UsersController(Mweb_DataTableFirstContext context)
         {
             _context = context;
         }
@@ -43,7 +43,7 @@ namespace MWeb_test.Controllers
         }
 
         // GET: Usersses/Create
-        public IActionResult Create()
+        public IActionResult Register()
         {
             return View();
         }
@@ -53,7 +53,7 @@ namespace MWeb_test.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,UserName,UserEmail,UserPassword,Created,UserStatus")] Userss userss)
+        public async Task<IActionResult> Register([Bind("UserId,UserName,UserEmail,UserPassword,Created,UserStatus")] Userss userss)
         {
             if (ModelState.IsValid)
             {
